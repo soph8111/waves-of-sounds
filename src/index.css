@@ -1,3 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+
+div#navbar {
+  background-color: rgb(143, 143, 143, 0.4);
+  position: fixed;
+  top: 0;
+  height: 60px;
+  width: 100%;
+}
+
+/* WelcomeSection */
+
+div#welcome_image {
+  height: 100vh;
+  background-size: cover;
+  background-image: url(./src/assets/images/front_image.jpg);
+}
+
+/* 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -66,3 +90,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+*/

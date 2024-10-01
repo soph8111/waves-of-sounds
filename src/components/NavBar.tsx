@@ -1,0 +1,157 @@
+/* Navbar from Chakra: https://chakra-templates.vercel.app/navigation/navbar*/
+
+import {
+    Box,
+    Flex,
+    Text,
+    IconButton,
+    Button,
+    Stack,
+    Collapse,
+    useColorModeValue,
+    useDisclosure,
+  } from '@chakra-ui/react'
+  
+  import {
+    HamburgerIcon,
+    CloseIcon,
+  } from '@chakra-ui/icons'
+
+  interface NavItem {
+    label: string
+    href?: string
+  }
+  
+  const NAV_ITEMS: Array<NavItem> = [
+    {
+      label: 'program',
+      href: '#',
+    },
+    {
+      label: 'news',
+      href: '#',
+    },
+    {
+      label: 'volunteers',
+      href: '#',
+    },
+    {
+      label: 'about',
+      href: '#',
+    },
+  ]
+  
+  export default function NavBar() {
+    const { isOpen, onToggle } = useDisclosure()
+  
+    return (
+      <Box>
+        <Flex
+          bgColor={'rgb(143, 143, 143, 0.4)'}
+          position={'fixed'}
+          minH={'60px'}
+          width={'100%'}
+          align={'center'}
+          py={{ base: 2 }}
+          px={{ base: 4 }}
+          >
+          <Flex
+            flex={{ base: 1, md: 'auto' }}
+            display={{ base: 'flex', md: 'none' }}>
+            <IconButton
+              onClick={onToggle}
+              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              variant={'ghost'}
+              aria-label={'Toggle Navigation'}
+            />
+          </Flex>
+          <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} height={'45px'} >
+            <img src="./src/assets/images/logo.png" alt="logo"/>
+            <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+              <DesktopNav />
+            </Flex>
+          </Flex>
+  
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify={'flex-end'}
+            direction={'row'}
+            spacing={6}>
+            <Button 
+            as={'a'} 
+            href={'#'}
+            bgColor={'#083C6E'}
+            color={'white'}
+            >
+              Buy ticket
+            </Button>
+          </Stack>
+        </Flex>
+  
+        <Collapse in={isOpen} >
+          <MobileNav />
+        </Collapse>
+      </Box>
+    )
+  }
+  
+  const DesktopNav = () => {
+    const linkColor = useColorModeValue('gray.600', 'gray.200')
+    return (
+      <Stack direction={'row'} spacing={4}>
+        {NAV_ITEMS.map((navItem) => (
+          <Box key={navItem.label}>
+                <Box
+                  as="a"
+                  p={2}
+                  href={navItem.href ?? '#'}
+                  fontSize={'sm'}
+                  fontWeight={500}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: 'none',
+                  }}>
+                  {navItem.label}
+                </Box>
+          </Box>
+        ))}
+      </Stack>
+    )
+  }
+  
+  const MobileNav = () => {
+    return (
+      <Stack 
+      bgColor={'rgb(143, 143, 143, 0.4)'}
+      p={4} 
+      position={'absolute'}
+      top={'60px'}
+      width={'100%'}
+      >
+        {NAV_ITEMS.map((navItem) => (
+          <MobileNavItem key={navItem.label} {...navItem} />
+        ))}
+      </Stack>
+    )
+  }
+  
+  const MobileNavItem = ({ label, href }: NavItem) => {
+  
+    return (
+      <Stack spacing={4} >
+        <Box
+          py={2}
+          as="a"
+          href={href ?? '#'}
+          justifyContent="space-between"
+          alignItems="center"
+          _hover={{
+            textDecoration: 'none',
+          }}>
+          <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
+            {label}
+          </Text>
+        </Box>
+      </Stack>
+    )
+  }
