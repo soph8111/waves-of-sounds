@@ -1,0 +1,75 @@
+/* Main css-file for defining colors, layout ... */
+
+/* Import fonts */
+@font-face {
+  font-family: 'MessapiaRegular';
+  src: url(./src/assets/fonts/Messapia-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'MessapiaBold';
+  src: url(./src/assets/fonts/Messapia-Bold.ttf);
+}
+
+/* CSS Variables */
+:root {
+  --main-color-blue: #083C6E;
+  --main-color-white: #dfdddd;
+  --background-color: rgb(143, 143, 143, 0.5);
+  --main-font-bold: MessapiaBold;
+  --main-font-regular: MessapiaRegular;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body  {
+  background-color: var(--main-color-white);
+}
+
+h1 {
+  font-family: var(--main-font-bold);
+  font-size: 2em;
+  color: var(--main-color-blue);
+  margin-bottom: 1em;
+}
+
+.intro_text{
+  font-family: sans-serif;
+}
+
+.container {
+  margin: 100px 2em;
+}
+
+.intro_text {
+  margin: 2em 0;
+}
+
+/* Buttons */
+button {
+  background-color: var(--main-color-blue);
+  border: none;
+  height: 30px;
+  place-content: center;
+  color: var(--main-color-white);
+  border-radius: 10px;
+  font-family: var(--main-font-bold);
+  font-size: 0.7em;
+}
+
+/* Styling desktop  */
+@media (min-width: 992px) {
+  
+  .container {
+    margin: 100px 10em;
+  }
+
+  .intro_text {
+    width: 400px;
+  }
+
+}

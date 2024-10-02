@@ -1,0 +1,7 @@
+/* WelcomeSection */
+
+div#welcome_image {
+    height: 100vh;
+    background-size: cover;
+    background-image: url(../src/assets/images/front_image.jpg);
+  }

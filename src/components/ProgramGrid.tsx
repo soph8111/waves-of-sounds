@@ -1,14 +1,9 @@
-import data from "../services/data.json";
+import ArtistCard from "./ProgramArtistCard";
 
 function ProgramGrid() {
     return (
-      <div>
-        <h1>Artists</h1>
-        {data.artists.map((artist) => (
-          <div key={artist.id}>
-            <h2>{artist.name}</h2>
-          </div>
-        ))}
+      <div id="artist_grid">
+        <ArtistCard />
       </div>
     );
   }

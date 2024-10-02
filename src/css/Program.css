@@ -1,0 +1,42 @@
+
+hr {
+    border: 2px solid var(--main-color-blue);
+    border-radius: 5px;
+}
+
+/* Artist Grid */
+#artist_grid {
+    display: grid;
+    grid-gap: 3.5em;
+    grid-template-columns: repeat(auto-fit, 270px);
+    justify-content: center;
+    margin: 2em 0;
+}
+
+/* Artist card */
+
+.artist_card {
+    background-color: var(--main-color-blue);
+    color: var(--main-color-white);
+    text-align: end;
+}
+
+.artist_card_info {
+    padding: 1em;
+    font-family: var(--main-font-bold);
+}
+
+.artist_card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Styling desktop  */
+@media (min-width: 992px) {
+
+    hr {
+        width: 400px;
+    }
+
+}
