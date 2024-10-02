@@ -1,3 +1,23 @@
+/* Import fonts */
+@font-face {
+  font-family: 'MessapiaRegular';
+  src: url(./src/assets/fonts/Messapia-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'MessapiaBold';
+  src: url(./src/assets/fonts/Messapia-Bold.ttf);
+}
+
+/* CSS Variables */
+:root {
+  --main-color-blue: #083C6E;
+  --main-color-white: #dfdddd;
+  --background-color: rgb(143, 143, 143, 0.5);
+  --main-font-bold: MessapiaBold;
+  --main-font-regular: MessapiaRegular;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,12 +26,14 @@
 
 /* Buttons */
 button {
-  background-color: #083C6E;
-  border: navajowhite;
+  background-color: var(--main-color-blue);
+  border: none;
   height: 30px;
   place-content: center;
-  color: #dfdddd;
+  color: var(--main-color-white);
   border-radius: 10px;
+  font-family: var(--main-font-bold);
+  font-size: 0.7em;
 }
 
 /* Navbar */
@@ -20,17 +42,33 @@ button {
   background-color: rgb(143, 143, 143, 0.5);
   position: fixed;
   top: 0;
-  height: 60px;
+  height: 65px;
   padding: 10px 20px;
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
 }
 
-.navbar  > * {
-  width: calc(100%/3);
-  display: grid;
-  justify-content: center;
+.navbar .logo {
+  justify-self: center;
+}
+
+.navbar img {
+  height: 45px;
+}
+
+.navbar .menu_trigger {
+  background: none;
+  width: 3em;
+  height: 3em;
+  
+}
+
+.navbar .menu_trigger > * {
+  color: var(--main-color-blue);
+  height: 1.6em;
+  width: 1.6em;
 }
 
 .navbar ul {
@@ -41,11 +79,26 @@ button {
 .navbar ul.is_open {
   display: block;
   position: absolute;
-  top: 59px;
+  top: 64px;
   left: 0;
   width: 100%;
   padding: 5px 20px 10px;
   background-color: rgb(143, 143, 143, 0.5);
+}
+
+.navbar li {
+  margin: 0.7em 0;
+}
+
+.navbar a {
+  font-family: var(--main-font-bold);
+  font-size: 0.9em;
+  text-decoration: none;
+  color: var(--main-color-blue);
+}
+
+.navbar a:hover {
+  color: var(--main-color-white);
 }
 
 /* WelcomeSection */
@@ -66,6 +119,10 @@ div#welcome_image {
     display: none;
   }
 
+  .navbar .logo {
+    justify-self: flex-start;
+  }
+
   .navbar ul {
     display: flex;
     justify-content: center;
@@ -74,6 +131,12 @@ div#welcome_image {
 
   .navbar ul li {
     display: inline;
+  }
+
+  .navbar .buy_ticket {
+    width: max-content;
+    padding: 0 1em;
+    justify-self: flex-end;
   }
 
 }

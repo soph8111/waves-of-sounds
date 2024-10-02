@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import { IconButton } from '@chakra-ui/react'
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 
 export default function Navbar() {
@@ -15,10 +17,14 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-            <button className="menu_trigger" onClick={toggleMenu}>X</button>
-
-      <Link to="/" className="site-title">
-        Logo
+      <IconButton 
+      className="menu_trigger" 
+      aria-label='Toggle Menu'
+      onClick={toggleMenu} 
+      icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+      />
+      <Link to="/" className="logo">
+        <img src="./src/assets/images/logo.png" alt="Logo" />
       </Link>
       <ul className={isOpen ? 'is_open' : ''}>
         <CustomLink to="./program">program</CustomLink>
@@ -26,7 +32,7 @@ export default function Navbar() {
         <CustomLink to="./volunteers">volunteers</CustomLink>
         <CustomLink to="./about">about</CustomLink>
       </ul>
-      <button>Buy ticket</button>
+      <button className="buy_ticket">Buy ticket</button>
     </nav>
   )
 }
