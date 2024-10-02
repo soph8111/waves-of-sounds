@@ -4,14 +4,48 @@
   padding: 0;
 }
 
+/* Buttons */
+button {
+  background-color: #083C6E;
+  border: navajowhite;
+  height: 30px;
+  place-content: center;
+  color: #dfdddd;
+  border-radius: 10px;
+}
+
 /* Navbar */
 
-div#navbar {
-  background-color: rgb(143, 143, 143, 0.4);
+.navbar {
+  background-color: rgb(143, 143, 143, 0.5);
   position: fixed;
   top: 0;
   height: 60px;
+  padding: 10px 20px;
   width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar  > * {
+  width: calc(100%/3);
+  display: grid;
+  justify-content: center;
+}
+
+.navbar ul {
+  display: none;
+  list-style: none;
+}
+
+.navbar ul.is_open {
+  display: block;
+  position: absolute;
+  top: 59px;
+  left: 0;
+  width: 100%;
+  padding: 5px 20px 10px;
+  background-color: rgb(143, 143, 143, 0.5);
 }
 
 /* WelcomeSection */
@@ -21,6 +55,30 @@ div#welcome_image {
   background-size: cover;
   background-image: url(../src/assets/images/front_image.jpg);
 }
+
+/* Styling desktop  */
+
+@media (min-width: 992px) {
+
+  /* Navbar */
+
+  .navbar .menu_trigger {
+    display: none;
+  }
+
+  .navbar ul {
+    display: flex;
+    justify-content: center;
+    gap: 2.5em;
+  }
+
+  .navbar ul li {
+    display: inline;
+  }
+
+}
+
+
 
 /* 
 :root {

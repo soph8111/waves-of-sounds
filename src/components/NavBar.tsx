@@ -1,14 +1,32 @@
+// Guide to how I made NavBar: https://www.youtube.com/watch?v=SLfhMt5OUPI
+
+import { useState } from "react"
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 
+
 export default function Navbar() {
+
+  const [ isOpen, setIsOpen ] = useState(false);
+
+  // Function for toggle menu
+  const toggleMenu = () => {
+    setIsOpen((open) => !open) 
+  }
+
   return (
-    <nav className="nav">
+    <nav className="navbar">
+            <button className="menu_trigger" onClick={toggleMenu}>X</button>
+
       <Link to="/" className="site-title">
         Logo
       </Link>
-      <ul>
-        <CustomLink to="../pages/Program">Program</CustomLink>
+      <ul className={isOpen ? 'is_open' : ''}>
+        <CustomLink to="./program">program</CustomLink>
+        <CustomLink to="./news">news</CustomLink>
+        <CustomLink to="./volunteers">volunteers</CustomLink>
+        <CustomLink to="./about">about</CustomLink>
       </ul>
+      <button>Buy ticket</button>
     </nav>
   )
 }

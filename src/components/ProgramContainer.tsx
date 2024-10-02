@@ -1,16 +1,12 @@
-import { Box } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import ProgramGrid from "./ProgramGrid";
 
-interface Props {
-  children: ReactNode;
-}
-
-const ProgramContainer = ({ children }: Props) => {
-  return (
-    <Box overflow="hidden" borderRadius={10}>
-      {children}
-    </Box>
-  );
-};
-
-export default ProgramContainer;
+const Program = () => {
+    return (
+        <>        
+        <h1>test</h1>
+        <ProgramGrid />
+        </>
+    );
+  };
+  
+export default Program

@@ -1,8 +1,11 @@
 import NavBar from "./components/NavBar"
 import Footer from "./components/Footer"
-import Home from "./pages/Home"
-import Program from "./pages/Program"
+import Home from "./components/HomeContainer"
+import Program from "./components/ProgramContainer"
 import { Route, Routes } from "react-router-dom"
+import News from "./components/NewsContainer"
+import Volunteers from "./components/VolunteersContainer"
+import About from "./components/AboutContainer"
 
 function App() {
 
@@ -11,7 +14,10 @@ function App() {
     <NavBar />
     <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pages/Program" element={<Program />} />
+        <Route path="/program" element={<Program />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/volunteers" element={<Volunteers />} />
+        <Route path="/about" element={<About />} />
        </Routes>
     <Footer />
     </>
