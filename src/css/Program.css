@@ -1,3 +1,23 @@
+/* Selectors */
+
+#program_selectors {
+    display: flex;
+    column-gap: 1.2em;
+    margin-bottom: 2em;
+}
+
+#program_selectors .selector_name {
+    color: var(--main-color-blue);
+}
+
+#program_selectors .selector_list {
+    background: var(--main-color-blue);
+    padding: 1.2em;
+    display: grid;
+    gap: 1em;
+    color: var(--main-color-white);
+}
+
 
 hr {
     border: 2px solid var(--main-color-blue);

@@ -1,5 +1,6 @@
-import data from "../services/data.json";
+import data from "../services/program.json";
 function ArtistCard() {
+    
     return (
     <>
     {data.artists.map((artist) => (
@@ -16,4 +17,6 @@ function ArtistCard() {
     );
   }
 
-  export default ArtistCard
+  export default ArtistCard 
+
+

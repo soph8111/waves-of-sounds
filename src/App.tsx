@@ -6,8 +6,13 @@ import { Route, Routes } from "react-router-dom"
 import News from "./components/NewsContainer"
 import Volunteers from "./components/VolunteersContainer"
 import About from "./components/AboutContainer"
+import NewsArticle from "./components/NewsPage"
+// import { useLocation } from 'react-router-dom'
 
 function App() {
+
+  // const location = useLocation()
+  // const state = location.state
 
   return (
     <>
@@ -18,6 +23,7 @@ function App() {
       <Route path="/news" element={<News />} />
       <Route path="/volunteers" element={<Volunteers />} />
       <Route path="/about" element={<About />} />
+      <Route path="/news/:slug" element={<NewsArticle />} />
     </Routes>
     <Footer />
     </>

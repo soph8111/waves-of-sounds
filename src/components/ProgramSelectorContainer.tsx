@@ -1,14 +1,14 @@
-import FilterData from "./ProgramSelectorDate";
-import FilterGenre from "./ProgramSelectorGenre";
+import DateSelector from "./ProgramSelectorDate";
+import SelectorGenre from "./ProgramSelectorGenre";
 import StageSelector from "./ProgramSelectorStage";
 
 const FilterContainer = () => {
     return (
-    <>
-    <StageSelector />
-    <FilterGenre />
-    <FilterData />
-    </>
+    <div id="program_selectors">
+      <DateSelector />
+      <StageSelector />
+      <SelectorGenre />
+    </div>
     );
   };
   

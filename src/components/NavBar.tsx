@@ -32,7 +32,7 @@ export default function Navbar() {
         <CustomLink to="./volunteers">volunteers</CustomLink>
         <CustomLink to="./about">about</CustomLink>
       </ul>
-      <button className="buy_ticket">Buy ticket</button>
+      <button className="buy_ticket styled_button">Buy ticket</button>
     </nav>
   )
 }

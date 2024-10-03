@@ -1,7 +1,7 @@
 /* Navbar */
 
 .navbar {
-    background-color: rgb(143, 143, 143, 0.5);
+    background-color: var(--background-color);
     position: fixed;
     top: 0;
     height: 65px;
@@ -44,7 +44,7 @@
     left: 0;
     width: 100%;
     padding: 5px 20px 10px;
-    background-color: rgb(143, 143, 143, 0.5);
+    background-color: var(--background-color);
   }
   
   .navbar li {

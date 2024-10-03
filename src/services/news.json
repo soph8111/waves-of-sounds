@@ -1,0 +1,25 @@
+{
+    "news": [
+        {
+            "id": 1,
+            "date": "25.09.2024",
+            "titel": "We will do it again",
+            "article": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales luctus, mauris magna eleifend nisi, quis consectetur nisl massa id odio. Praesent eu nisl congue, elementum dolor tristique, tincidunt mauris. In rutrum cursus neque, quis condimentum dolor aliquam vitae. Duis eu porta nisl.\nNulla laoreet facilisis enim ut congue. Sed tincidunt vulputate mauris. Aliquam non luctus enim, vel malesuada urna. Vivamus dictum porta leo eu aliquet. Sed eu felis nec massa pulvinar congue ac eget magna. Sed laoreet, felis vel vulputate iaculis, purus nisi tristique enim, sit amet blandit dui turpis sed nulla. Maecenas et ex lacus. Donec lobortis vestibulum luctus.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales luctus, mauris magna eleifend nisi, quis consectetur nisl massa id odio. Praesent eu nisl congue, elementum dolor tristique, tincidunt mauris. In rutrum cursus neque, quis condimentum dolor aliquam vitae. Duis eu porta nisl.\nNulla laoreet facilisis enim ut congue. Sed tincidunt vulputate mauris. Aliquam non luctus enim, vel malesuada urna. Vivamus dictum porta leo eu aliquet. Sed eu felis nec massa pulvinar congue ac eget magna. Sed laoreet, felis vel vulputate iaculis, purus nisi tristique enim, sit amet blandit dui turpis sed nulla. Maecenas et ex lacus. Donec lobortis vestibulum luctus.",
+            "image": "../src/assets/images/party.jpg"
+        },
+        {
+            "id": 2,
+            "date": "29.09.2024",
+            "titel": "What a party",
+            "article": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales luctus, mauris magna eleifend nisi, quis consectetur nisl massa id odio. Praesent eu nisl congue, elementum dolor tristique, tincidunt mauris. In rutrum cursus neque, quis condimentum dolor aliquam vitae. Duis eu porta nisl.\nNulla laoreet facilisis enim ut congue. Sed tincidunt vulputate mauris. Aliquam non luctus enim, vel malesuada urna. Vivamus dictum porta leo eu aliquet. Sed eu felis nec massa pulvinar congue ac eget magna. Sed laoreet, felis vel vulputate iaculis, purus nisi tristique enim, sit amet blandit dui turpis sed nulla. Maecenas et ex lacus. Donec lobortis vestibulum luctus.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales luctus, mauris magna eleifend nisi, quis consectetur nisl massa id odio. Praesent eu nisl congue, elementum dolor tristique, tincidunt mauris. In rutrum cursus neque, quis condimentum dolor aliquam vitae. Duis eu porta nisl.\nNulla laoreet facilisis enim ut congue. Sed tincidunt vulputate mauris. Aliquam non luctus enim, vel malesuada urna. Vivamus dictum porta leo eu aliquet. Sed eu felis nec massa pulvinar congue ac eget magna. Sed laoreet, felis vel vulputate iaculis, purus nisi tristique enim, sit amet blandit dui turpis sed nulla. Maecenas et ex lacus. Donec lobortis vestibulum luctus.",
+            "image": "../src/assets/images/party.jpg"
+        },
+        {
+            "id": 3,
+            "date": "02.10.2024",
+            "titel": "Belive it or not",
+            "article": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales luctus, mauris magna eleifend nisi, quis consectetur nisl massa id odio. Praesent eu nisl congue, elementum dolor tristique, tincidunt mauris. In rutrum cursus neque, quis condimentum dolor aliquam vitae. Duis eu porta nisl.\nNulla laoreet facilisis enim ut congue. Sed tincidunt vulputate mauris. Aliquam non luctus enim, vel malesuada urna. Vivamus dictum porta leo eu aliquet. Sed eu felis nec massa pulvinar congue ac eget magna. Sed laoreet, felis vel vulputate iaculis, purus nisi tristique enim, sit amet blandit dui turpis sed nulla. Maecenas et ex lacus. Donec lobortis vestibulum luctus.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales luctus, mauris magna eleifend nisi, quis consectetur nisl massa id odio. Praesent eu nisl congue, elementum dolor tristique, tincidunt mauris. In rutrum cursus neque, quis condimentum dolor aliquam vitae. Duis eu porta nisl.\nNulla laoreet facilisis enim ut congue. Sed tincidunt vulputate mauris. Aliquam non luctus enim, vel malesuada urna. Vivamus dictum porta leo eu aliquet. Sed eu felis nec massa pulvinar congue ac eget magna. Sed laoreet, felis vel vulputate iaculis, purus nisi tristique enim, sit amet blandit dui turpis sed nulla. Maecenas et ex lacus. Donec lobortis vestibulum luctus.",
+            "image": "../src/assets/images/party.jpg"
+        }
+    ]
+}

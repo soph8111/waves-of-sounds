@@ -15,7 +15,7 @@
 :root {
   --main-color-blue: #083C6E;
   --main-color-white: #dfdddd;
-  --background-color: rgb(143, 143, 143, 0.5);
+  --background-color: rgb(197, 196, 196, 0.85);
   --main-font-bold: MessapiaBold;
   --main-font-regular: MessapiaRegular;
 }
@@ -37,6 +37,20 @@ h1 {
   margin-bottom: 1em;
 }
 
+h2 {
+  font-family: var(--main-font-bold);
+  font-size: 1em;
+  color: var(--main-color-blue);
+  margin-bottom: 0.8em;
+}
+
+h3 {
+  font-family: var(--main-font-regular);
+  font-size: 0.8em;
+  color: var(--main-color-blue);
+  margin-bottom: 0.8em;
+}
+
 .intro_text{
   font-family: sans-serif;
 }
@@ -50,9 +64,15 @@ h1 {
 }
 
 /* Buttons */
+
 button {
-  background-color: var(--main-color-blue);
   border: none;
+  background: none;
+  font-family: var(--main-font-bold);
+}
+
+.styled_button {
+  background-color: var(--main-color-blue);
   height: 30px;
   place-content: center;
   color: var(--main-color-white);
