@@ -4,7 +4,7 @@
             "id": 1,
             "name": "John",
             "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales luctus, mauris magna eleifend nisi, quis consectetur nisl massa id odio. Praesent eu nisl congue, elementum dolor tristique, tincidunt mauris. In rutrum cursus neque, quis condimentum dolor aliquam vitae. Duis eu porta nisl. Nulla laoreet facilisis enim ut congue. Sed tincidunt vulputate mauris. Aliquam non luctus enim, vel malesuada urna. Vivamus dictum porta leo eu aliquet. Sed eu felis nec massa pulvinar congue ac eget magna. Sed laoreet, felis vel vulputate iaculis, purus nisi tristique enim, sit amet blandit dui turpis sed nulla. Maecenas et ex lacus. Donec lobortis vestibulum luctus.",
-            "spotify": "spotify.link",
+            "spotify": "https://open.spotify.com/embed/track/2jdAk8ATWIL3dwT47XpRfu?utm_source=generator",
             "image": "../src/assets/images/artist_image.jpg",
             "stage" : {
                 "id": 1,

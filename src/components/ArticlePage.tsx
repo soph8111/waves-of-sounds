@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
 
-export default function  NewsArticle () {
+export default function  ArticlePage () {
   const location = useLocation()
   const news = location.state
 

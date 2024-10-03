@@ -53,14 +53,11 @@ h3 {
 
 .intro_text{
   font-family: sans-serif;
+  margin: 2em 0;
 }
 
 .container {
-  margin: 100px 2em;
-}
-
-.intro_text {
-  margin: 2em 0;
+  margin: 100px 2em 0;
 }
 
 /* Buttons */
@@ -85,11 +82,11 @@ button {
 @media (min-width: 992px) {
   
   .container {
-    margin: 100px 10em;
+    margin: 100px 10em 0;
   }
 
   .intro_text {
-    width: 400px;
+    width: 28em;
   }
 
 }

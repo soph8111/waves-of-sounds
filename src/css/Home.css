@@ -1,7 +1,42 @@
 /* WelcomeSection */
 
-div#welcome_image {
+#welcome_image {
     height: 100vh;
     background-size: cover;
     background-image: url(../src/assets/images/front_image.jpg);
   }
+
+  #welcome_message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    h1 {
+      font-size: 2.3em;
+    }
+
+    h2 {
+      font-family: var(--main-font-regular);
+      font-size: 1.2em;
+      margin-bottom: 3em;
+    }
+
+  }
+
+
+  #explore_link {
+    font-size: 1.5em;
+    font-family: var(--main-font-bold);
+    text-decoration: none;
+    color: var(--main-color-blue);
+
+  }
+  
+  #explore_link:hover {
+    color: rgb(226, 226, 226);
+    text-shadow: -1px 2px var(--main-color-blue);
+    transition: all 0.4s ease;
+  }
+
