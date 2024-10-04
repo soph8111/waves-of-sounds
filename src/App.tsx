@@ -9,6 +9,7 @@ import About from "./components/AboutContainer"
 import ArticlePage from "./components/ArticlePage"
 import ArtistPage from "./components/ArtistPage"
 
+
 function App() {
 
   return (

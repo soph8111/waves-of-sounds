@@ -24,7 +24,7 @@ export default function Navbar() {
       icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
       />
       <Link to="/" className="logo">
-        <img src="./src/assets/images/logo.png" alt="Logo" />
+        <img src="../src/assets/images/logo.png" alt="Logo" />
       </Link>
       <ul className={isOpen ? 'is_open' : ''}>
         <CustomLink to="./program">program</CustomLink>

@@ -14,6 +14,7 @@ export default function  ArtistPage () {
         <img className='artist_img' src={artist.image} alt={artist.name} />
     </div>
     <iframe
+    title={artist.names}
     className="artist_spotify" 
     src={artist.spotify} 
     frameBorder="0" 

@@ -1,7 +1,7 @@
-@import url('./src/css/CustomProperties.css');
-@import url('./src/css/Navbar.css');
-@import url('./src/css/Home.css');
-@import url('./src/css/Program.css');
-@import url('./src/css/About.css');
-@import url('./src/css/Volunteers.css');
-@import url('./src/css/News.css');
+@import url('/src/css/CustomProperties.css');
+@import url('/src/css/Navbar.css');
+@import url('/src/css/Home.css');
+@import url('/src/css/Program.css');
+@import url('/src/css/About.css');
+@import url('/src/css/Volunteers.css');
+@import url('/src/css/News.css'); 
