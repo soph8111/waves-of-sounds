@@ -10,9 +10,7 @@ interface Props {
 }
 
 const StageSelector = ({ onSelectStage, selectedStage }: Props) => {
-  const { data: stages, error } = useStage();
-
-  if (error) return null;
+  const { data: stages} = useStage();
 
   return (
   <Menu>

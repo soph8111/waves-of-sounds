@@ -12,8 +12,8 @@ const artistRepository = AppDataSource.getRepository(Artist);
 artistRouter.get("/", async (req, res) => {
 const artists = await artistRepository.find();
 const response: Response = {
-count: artists.length,
-results: artists,
+    count: artists.length,
+    results: artists,
 };
 res.send(response);
 });

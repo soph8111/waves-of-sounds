@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -20,5 +21,11 @@ export class Stage {
   artists?: Artist[];
 
   @ManyToMany(() => Schedule, (schedule) => schedule.stages)
+  @JoinTable({
+    name: "stage_has_schedule",
+    joinColumns: [{ name: "stage_id", referencedColumnName: "id" }],
+    inverseJoinColumns: [{ name: "schedule_id", referencedColumnName: "id" }],
+    schema: "wavesOfSounds",
+  })
   schedules?: Schedule[];
 }

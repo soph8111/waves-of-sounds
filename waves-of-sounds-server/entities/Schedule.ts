@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany } from "typeorm";
 import { Artist } from "./Artist";
 import { Stage } from "./Stage";
 
@@ -17,11 +17,5 @@ export class Schedule {
   artists?: Artist[];
 
   @ManyToMany(() => Stage, (stage) => stage.schedules)
-  @JoinTable({
-    name: "stage_has_schedule",
-    joinColumns: [{ name: "schedule_id", referencedColumnName: "id" }],
-    inverseJoinColumns: [{ name: "stage_id", referencedColumnName: "id" }],
-    schema: "wavesOfSounds",
-  })
   stages?: Stage[];
 }

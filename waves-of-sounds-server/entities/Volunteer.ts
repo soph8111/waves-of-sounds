@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Department } from "./Department";
 
 @Entity("volunteer", { schema: "wavesOfSounds" })
@@ -16,5 +22,11 @@ export class Volunteer {
   createdAt?: Date | null;
 
   @ManyToMany(() => Department, (department) => department.volunteers)
+  @JoinTable({
+    name: "volunteer_has_department",
+    joinColumns: [{ name: "volunteer_id", referencedColumnName: "id" }],
+    inverseJoinColumns: [{ name: "department_id", referencedColumnName: "id" }],
+    schema: "wavesOfSounds",
+  })
   departments?: Department[];
 }
