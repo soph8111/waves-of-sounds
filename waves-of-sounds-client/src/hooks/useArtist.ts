@@ -1,22 +1,31 @@
-import { GameQuery } from "../App";
+import { DataQuery } from "../components/ProgramContainer";
 import useData from "./useData";
 
 export interface Artist {
   id: number;
   name: string;
-
+  bio: string;
+  spotify: string;
+  image: string;
+  scheduleId: number;
+  stageId: number;
 }
 
-const useArtist = (gameQuery: GameQuery) =>
+const useArtist = (dataQuery: DataQuery) => 
   useData<Artist>(
-    "/artist",
+    "/artist", 
     {
       params: {
-        genres: gameQuery.genre?.id,
-        parent_platforms: gameQuery.platform?.id,
-        stores: gameQuery.store?.id,
+        stage: dataQuery.stage?.id,
+       //date: dataQuery.date?.id,
+        // genre: dataQuery.genre?.id
       },
     },
-    [gameQuery]
+    [dataQuery]
   );
+
+
+// const useArtist = () => useData<Artist>("/artist");
+
 export default useArtist;
+

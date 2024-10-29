@@ -3,7 +3,7 @@
     "name": "default",
     "type": "mysql",
     "host": "localhost",
-    "port": 4000,
+    "port": 4001,
     "username": "root",
     "password": "root",
     "database": "",
