@@ -1,13 +1,20 @@
+
+
 import { useLocation } from 'react-router-dom'
 
 export default function  ArticlePage () {
   const location = useLocation()
-  const news = location.state
+  const article = location.state
 
   return (
     <>
-    <h1>TEST</h1>
-    <h1>{news.titel}</h1>
+    <div className='container article_grid'>
+        <div>
+            <h1>{article.title}</h1>
+            <p>{article.article}</p>
+        </div>
+        <img className='article_img' src={article.image} alt={article.title} />
+    </div>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { DataQuery } from "../components/ProgramContainer";
 import useData from "./useData";
+import { Stage } from "./useStage";
 
 export interface Artist {
   id: number;
@@ -8,24 +9,20 @@ export interface Artist {
   spotify: string;
   image: string;
   scheduleId: number;
-  stageId: number;
+  stageId: { stage: Stage }[];
 }
 
 const useArtist = (dataQuery: DataQuery) => 
   useData<Artist>(
-    "/artist", 
+    "/artists", 
     {
       params: {
-        stage: dataQuery.stage?.id,
-       //date: dataQuery.date?.id,
-        // genre: dataQuery.genre?.id
+        stageId: dataQuery.stage?.id,
+       genre: dataQuery.genre?.id
       },
     },
     [dataQuery]
   );
-
-
-// const useArtist = () => useData<Artist>("/artist");
 
 export default useArtist;
 
