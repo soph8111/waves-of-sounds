@@ -10,9 +10,9 @@ interface Props {
     
     return (
 
-        <div key={article.id} >
+        <div className="article_card" key={article.id} >
             <img src={article.image} alt={article.title} />
-            <div>
+            <div className="article_card_info">
                 <Link to={`/news/${article.title}`} relative="path" state={article}>{article.title}</Link>
             </div>
         </div>
