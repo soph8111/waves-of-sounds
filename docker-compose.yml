@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: waves_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - backend
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+     - "8887:8889"
+
+  waves-of-sounds-server:
+    container_name: waves-of-sounds-server
+    build:
+      context: ./waves-of-sounds-server
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_URL: mysql://root:root@mysql:8889/wavesOfSounds
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "4001:4001"
+    depends_on:
+      - mysql
+    volumes:
+      - ./waves-of-sounds-server:/app
+
+  waves-of-sounds-client:
+    container_name: waves-of-sounds-client
+    build:
+      context: ./waves-of-sounds-client
+      dockerfile: Dockerfile
+    environment:
+      VITE_API_URL: http://localhost:4001
+      CHOKIDAR_USEPOLLING: true
+    volumes:
+      - ./waves-of-sounds-client:/app
+      - /app/node_modules
+    depends_on:
+      - waves-of-sounds-server
+    ports:
+      - "8081:8081"
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  mysql_data:
