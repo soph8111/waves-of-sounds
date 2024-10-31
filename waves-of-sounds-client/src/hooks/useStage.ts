@@ -5,7 +5,7 @@ export interface Stage {
   name: string;
 }
 
-const useStage = () => useData<Stage>("/stage");
+const useStage = () => useData<Stage>("/stages");
 
 export default useStage;
 

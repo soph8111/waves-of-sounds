@@ -7,9 +7,9 @@ import articleRouter from "../routers/articleMysqlRouter";
 
 const setupMysqlRouters = (app: express.Application) => {
     app.use("/artists", artistRouter);
-    app.use("/stage", stageRouter);
-    app.use("/date", scheduleRouter);
-    app.use("/genre", genreRouter);
+    app.use("/stages", stageRouter);
+    app.use("/dates", scheduleRouter);
+    app.use("/genres", genreRouter);
     app.use("/articles", articleRouter);
 };
 

@@ -5,7 +5,7 @@ export interface Schedule {
   name: string;
 }
 
-const useSchedule = () => useData<Schedule>("/date");
+const useSchedule = () => useData<Schedule>("/dates");
 
 export default useSchedule;
 
