@@ -7,11 +7,17 @@ export class Schedule {
   @Column("int", { primary: true, name: "id" })
   id?: number;
 
-  @Column("datetime", { name: "start", nullable: true })
-  start?: Date | null;
+  @Column("date", { name: "startDate", nullable: true })
+  startDate?: string | null;
 
-  @Column("datetime", { name: "end", nullable: true })
-  end?: Date | null;
+  @Column("date", { name: "endDate", nullable: true })
+  endDate?: string | null;
+
+  @Column("time", { name: "startTime", nullable: true })
+  startTime?: string | null;
+
+  @Column("time", { name: "endTime", nullable: true })
+  endTime?: string | null;
 
   @OneToMany(() => Artist, (artist) => artist.schedule)
   artists?: Artist[];

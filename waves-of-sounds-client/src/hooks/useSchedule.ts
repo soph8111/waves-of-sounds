@@ -2,7 +2,10 @@ import useData from "./useData";
 
 export interface Schedule {
   id: number;
-  name: string;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
 }
 
 const useSchedule = () => useData<Schedule>("/dates");

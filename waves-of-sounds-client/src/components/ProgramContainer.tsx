@@ -8,9 +8,12 @@ import StageSelector from "./ProgramSelectorStage";
 import GenreSelector from "./ProgramSelectorGenre";
 import { HStack } from "@chakra-ui/react";
 import { Article } from "../hooks/useArticle";
+import { Schedule } from "../hooks/useSchedule";
+import DateSelector from "./ProgramSelectorDate";
 export interface DataQuery {
   artist: Artist | null;
   stage: Stage | null;
+  schedule: Schedule | null;
   genre: Genre | null;
   article: Article | null;
 }
@@ -28,13 +31,17 @@ const Program = () => {
       <StageSelector 
       selectedStage={dataQuery.stage}
       onSelectStage={(stage) => setDataQuery({ ...dataQuery, stage })}/>
-      <GenreSelector 
+      <DateSelector 
+      selectedSchedule={dataQuery.schedule}
+      onSelectSchedule={(schedule) => setDataQuery({ ...dataQuery, schedule })}
+        /> 
+      <GenreSelector
       selectedGenre={dataQuery.genre}
       onSelectGenre={(genre) => setDataQuery({ ...dataQuery, genre })}
-        />
+        />  
     </HStack>
     <h2 className="program_day">Placeholder: dag</h2>
-    <h3 className="prpogram_date">Placeholder: dato</h3>
+    <h3 className="program_date">Placeholder: dato</h3>
     <hr />
     {/* <ProgramGrid/> */}
     <ProgramGrid dataQuery={dataQuery}/>

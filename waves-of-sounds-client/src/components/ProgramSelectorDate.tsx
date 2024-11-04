@@ -1,9 +1,18 @@
 
-import data from '../services/program.json';
+// import data from '../services/program.json';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
+import useSchedule, { Schedule } from "../hooks/useSchedule";
 
-const DateSelector = () => {
+
+interface Props {
+  selectedSchedule: Schedule | null;
+  onSelectSchedule: (schedule: Schedule | null ) => void;
+}
+
+const DateSelector = ({ onSelectSchedule, selectedSchedule }: Props) => {
+  const { data: schedules} = useSchedule();
+
   return (
   <Menu>
     <MenuButton 
@@ -11,15 +20,24 @@ const DateSelector = () => {
     rightIcon={<ChevronDownIcon />}
     className="selector_name" 
     aria-label='selector_name'>
-    date
+    {selectedSchedule ? selectedSchedule.startDate : "Date"}
     </MenuButton>
     <MenuList>
-      {data.dates.map((date) => (
+      <MenuItem 
+          onClick={() => onSelectSchedule(null)} // Choose "all" by returning null
+          className="selector_list" 
+          aria-label="selector_list" 
+        >
+          All Dates
+          </MenuItem>
+      {schedules.map((schedule) => (
         <MenuItem 
+        onClick={() => onSelectSchedule(schedule)}
+        key={schedule.id}
         className="selector_list" 
         aria-label='selector_list' 
-        key={date.id}>
-          {date.date}
+        >
+          {schedule.startDate}
         </MenuItem>
       ))}
     </MenuList>

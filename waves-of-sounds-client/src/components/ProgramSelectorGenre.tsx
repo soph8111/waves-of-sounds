@@ -6,10 +6,10 @@ import useGenre, { Genre } from "../hooks/useGenre";
 
 interface Props {
   selectedGenre: Genre | null;
-  onSelectGenre: (genre: Genre) => void;
+  onSelectGenre: (genre: Genre | null ) => void;
 }
 
-const StageSelector = ({ onSelectGenre, selectedGenre }: Props) => {
+const GenreSelector = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data: genres} = useGenre();
 
   return (
@@ -22,6 +22,13 @@ const StageSelector = ({ onSelectGenre, selectedGenre }: Props) => {
     {selectedGenre ? selectedGenre.name : "Genre"}
     </MenuButton>
     <MenuList>
+    <MenuItem 
+          onClick={() => onSelectGenre(null)} // Choose "all" by returning null
+          className="selector_list" 
+          aria-label="selector_list" 
+        >
+          All Genres
+          </MenuItem>
       {genres.map((genre) => (
         <MenuItem 
         onClick={() => onSelectGenre(genre)}
@@ -37,4 +44,4 @@ const StageSelector = ({ onSelectGenre, selectedGenre }: Props) => {
   );
 };
   
-export default StageSelector
+export default GenreSelector

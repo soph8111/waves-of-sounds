@@ -6,7 +6,7 @@ import useStage, { Stage } from '../hooks/useStage';
 
 interface Props {
   selectedStage: Stage | null;
-  onSelectStage: (stage: Stage) => void;
+  onSelectStage: (stage: Stage | null ) => void;
 }
 
 const StageSelector = ({ onSelectStage, selectedStage }: Props) => {
@@ -22,6 +22,13 @@ const StageSelector = ({ onSelectStage, selectedStage }: Props) => {
     {selectedStage ? selectedStage.name : "Stage"}
     </MenuButton>
     <MenuList>
+      <MenuItem 
+          onClick={() => onSelectStage(null)} // Choose "all" by returning null
+          className="selector_list" 
+          aria-label="selector_list" 
+        >
+          All Stages
+          </MenuItem>
       {stages.map((stage) => (
         <MenuItem 
         onClick={() => onSelectStage(stage)}
