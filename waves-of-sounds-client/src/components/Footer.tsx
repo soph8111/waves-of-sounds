@@ -1,3 +1,5 @@
+import NewsletterForm from "./NewsletterForm";
+
 const Footer = () => {
     return (
     <div id="footer">
@@ -7,6 +9,7 @@ const Footer = () => {
             <p>17 - 19 juli 2025</p>
         </div>
         <p>don't miss out on great news</p>
+        <NewsletterForm />
     </div>
     );
 };
