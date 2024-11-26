@@ -11,7 +11,7 @@ const Newsletter = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Sending POST-request to backendt with name and email with user input
+    // Sending POST-request to backend with name and email with user input
     try { 
       await apiClient.post("/newsletter", { name, email });
       // if succesfull: Show message and empty input fields
