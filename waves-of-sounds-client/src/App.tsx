@@ -9,6 +9,7 @@ import About from "./components/AboutContainer"
 import ArticlePage from "./components/ArticlePage"
 import ArtistPage from "./components/ArtistPage"
 import AdminPage from "./components/AdminPage"
+import AdminRequire from "./components/AdminRequire"
 function App() {
 
   return (
@@ -24,7 +25,9 @@ function App() {
       <Route path="/news/:slug" element={<ArticlePage />} />
       
       
-      <Route path="/admin" element={<AdminPage />} />
+      <Route element={<AdminRequire />}>
+          <Route path="/admin" element={<AdminPage />} />
+        </Route>
 
     </Routes>
     <Footer />
