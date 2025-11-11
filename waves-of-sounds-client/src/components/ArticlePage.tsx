@@ -7,7 +7,6 @@ export default function  ArticlePage () {
   const article = location.state
 
   return (
-    <>
     <div className='container article_grid'>
         <div>
             <h1>{article.title}</h1>
@@ -15,6 +14,5 @@ export default function  ArticlePage () {
         </div>
         <img className='article_img' src={article.image} alt={article.title} />
     </div>
-    </>
   )
 }

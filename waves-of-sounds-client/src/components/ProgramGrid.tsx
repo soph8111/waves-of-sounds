@@ -4,15 +4,16 @@ import { DataQuery } from "./ProgramContainer";
 
 interface Props {
   dataQuery: DataQuery;
+  isAdmin: boolean; 
 }
 
-const ProgramGrid = ({ dataQuery }: Props) => {
+const ProgramGrid = ({ dataQuery, isAdmin }: Props) => {
   const { data: artists } = useArtist(dataQuery);
 
     return (
     <div id="artist_grid">
     {artists.map((artist) => (
-          <ArtistCard key={artist.id} artist={artist} />
+          <ArtistCard key={artist.id} artist={artist} isAdmin={isAdmin} />
       ))}
     </div>
   );

@@ -14,6 +14,7 @@ export interface DataQuery {
   artist: Artist | null;
   stage: Stage | null;
   schedule: Schedule | null;
+  scheduleDate: string | null;
   genre: Genre | null;
   article: Article | null;
 }
@@ -21,6 +22,8 @@ export interface DataQuery {
 const Program = () => {
 
   const [dataQuery, setDataQuery] = useState<DataQuery>({} as DataQuery);
+
+  const isAdmin = localStorage.getItem("isAdmin") === "true"; // Tjekker om Admin er logget ind
 
     return (
     <div className="container">
@@ -44,7 +47,7 @@ const Program = () => {
     <h3 className="program_date">Placeholder: dato</h3>
     <hr />
     {/* <ProgramGrid/> */}
-    <ProgramGrid dataQuery={dataQuery}/>
+    <ProgramGrid dataQuery={dataQuery} isAdmin={isAdmin} />
     </div>
     );
   };
