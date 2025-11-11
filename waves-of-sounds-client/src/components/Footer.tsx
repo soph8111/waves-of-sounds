@@ -1,3 +1,4 @@
+import AdminLogin from "./AdminLogin";
 import NewsletterForm from "./NewsletterForm";
 
 const Footer = () => {
@@ -10,8 +11,9 @@ const Footer = () => {
         </div>
         <p>don't miss out on great news</p>
         <NewsletterForm />
+        <AdminLogin />
     </div>
     );
 };
   
-  export default Footer;
+  export default Footer

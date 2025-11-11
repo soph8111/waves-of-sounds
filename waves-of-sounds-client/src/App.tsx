@@ -8,7 +8,7 @@ import Volunteers from "./components/VolunteersContainer"
 import About from "./components/AboutContainer"
 import ArticlePage from "./components/ArticlePage"
 import ArtistPage from "./components/ArtistPage"
-
+import AdminPage from "./components/AdminPage"
 function App() {
 
   return (
@@ -22,6 +22,10 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/artist/:slug" element={<ArtistPage />} />
       <Route path="/news/:slug" element={<ArticlePage />} />
+      
+      
+      <Route path="/admin" element={<AdminPage />} />
+
     </Routes>
     <Footer />
     </>
