@@ -7,26 +7,25 @@ interface Props {
     artist: Artist;
     isAdmin?: boolean;                       // <- vis knap kun for admin
     onDeleted?: (id: number) => void;
-
   }
 
   const ArtistCard = ({ artist, isAdmin = false, onDeleted }: Props) => {
     // console.log("ArtistCard isAdmin =", isAdmin);
 
-  const handleDelete = async (e: React.MouseEvent) => {
-    e.preventDefault();    // så klik på knappen ikke trigger link
+    const handleDelete = async (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
 
     if (!confirm(`Slet "${artist.name}" fra programmet?`)) return;
 
     try {
-      await apiClient.delete(`/api/artists/${artist.id}`);
-      onDeleted?.(artist.id);              // fortæl parent at den kan fjerne kortet
+        await apiClient.delete(`artists/${artist.id}`);
+        onDeleted?.(artist.id);
     } catch (err) {
-      console.error(err);
-      alert("Fejl: kunne ikke slette artist.");
+        console.error(err);
+        alert("Fejl: kunne ikke slette artist.");
     }
-  };
+    };
 
   return (
     <div className="artist_card" key={artist.id}>
