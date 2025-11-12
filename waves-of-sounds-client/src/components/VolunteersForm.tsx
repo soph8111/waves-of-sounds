@@ -77,4 +77,4 @@ const VolunteerForm = () => {
   );
 };
 
-export default VolunteerForm;
+export default VolunteerForm
