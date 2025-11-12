@@ -1,58 +1,80 @@
 import { useState } from "react";
 import apiClient from "../services/api-client";
 
-// import AdminStageSelector from "./AdminNewArtistSelectorStage";
-// import AdminScheduleSelector from "./AdminNewArtistSelectorSchedule";
-// import AdminGenreSelector from "./AdminNewArtistSelectorGenre";
+import AdminStageSelector from "./AdminNewArtistSelectorStage";
+import AdminScheduleSelector from "./AdminNewArtistSelectorSchedule";
+import AdminGenreSelector from "./AdminNewArtistSelectorGenre";
 
+interface Stage {
+  id: number;
+  name: string;
+}
+
+interface Schedule {
+  id: number;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+}
 
 const NewArtistForm = () => {
+  // Form fields
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [spotify, setSpotify] = useState("");
   const [image, setImage] = useState("");
 
-  const [selectedStage, setSelectedStage] = useState(null);
-  const [selectedSchedule, setSelectedSchedule] = useState(null);
-//   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+  // Related selections
+  const [selectedStage, setSelectedStage] = useState<Stage | null>(null);
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
 
+  // Feedback message
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!selectedStage || !selectedSchedule) {
-      setMessage("Please select both stage and schedule.");
+    // Basic validation
+    if (!name || !selectedStage || !selectedSchedule) {
+      setMessage("Please fill in all required fields (name, stage, schedule).");
       return;
     }
 
     try {
-      await apiClient.post("/artists", {
+      // 🧩 Send data to backend
+      const response = await apiClient.post("/artists", {
         name,
         bio,
         spotify,
-        image
+        image,
+        stageId: selectedStage.id,
+        scheduleId: selectedSchedule.id,
+        genreIds: selectedGenres,
       });
 
-      // Reset form
-      setName("");
-      setBio("");
-      setSpotify("");
-      setImage("");
-      setSelectedStage(null);
-      setSelectedSchedule(null);
-    //   setSelectedGenres([]);
-
-      setMessage("Artist added!");
-    } catch (err) {
-      console.error(err);
-      setMessage("Error adding artist.");
+      if (response.status === 201 || response.status === 200) {
+        setMessage("Artist added successfully!");
+        setName("");
+        setBio("");
+        setSpotify("");
+        setImage("");
+        setSelectedStage(null);
+        setSelectedSchedule(null);
+        setSelectedGenres([]);
+      } else {
+        setMessage("⚠️ Something went wrong while adding the artist.");
+      }
+    } catch (error) {
+      console.error("Error adding artist:", error);
+      setMessage("Could not add artist. Check console for details.");
     }
   };
 
   return (
-    <div>
-      <h2>Add Artist</h2>
+    <div className="admin-form">
+      <h2>Add New Artist</h2>
 
       <form onSubmit={handleSubmit}>
         <input
@@ -64,7 +86,7 @@ const NewArtistForm = () => {
         />
 
         <textarea
-          placeholder="Bio"
+          placeholder="Artist Bio"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
@@ -78,25 +100,28 @@ const NewArtistForm = () => {
 
         <input
           type="text"
-          placeholder="Image Path"
+          placeholder="Image Path (e.g. /img/artists/artist.jpg)"
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
 
-        {/* <AdminStageSelector
+        {/* Stage dropdown */}
+        <AdminStageSelector
           selectedStage={selectedStage}
           onSelectStage={setSelectedStage}
         />
 
+        {/* Schedule dropdown */}
         <AdminScheduleSelector
           selectedSchedule={selectedSchedule}
           onSelectSchedule={setSelectedSchedule}
         />
 
+        {/* Genre multi-select */}
         <AdminGenreSelector
           selectedGenres={selectedGenres}
           onSelectGenres={setSelectedGenres}
-        /> */}
+        />
 
         <button type="submit">Add Artist</button>
       </form>
