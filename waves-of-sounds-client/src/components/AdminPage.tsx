@@ -2,6 +2,7 @@
 import { Button, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import NewArtistForm from "./AdminNewArtistForm";
+import NewArticleForm from "./AdminNewsBlock";
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -17,8 +18,7 @@ export default function AdminPage() {
       <Button onClick={handleLogout}>Log ud</Button>
 
       <NewArtistForm></NewArtistForm>
-
-      
+      <NewArticleForm></NewArticleForm>
     </div>
   );
 }
