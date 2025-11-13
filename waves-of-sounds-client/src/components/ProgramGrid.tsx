@@ -7,9 +7,10 @@ import { DataQuery } from "./ProgramContainer";
 interface Props {
   dataQuery: DataQuery;
   isAdmin: boolean;
+  onEdit?: (artist: Artist) => void
 }
 
-const ProgramGrid = ({ dataQuery, isAdmin }: Props) => {
+const ProgramGrid = ({ dataQuery, isAdmin, onEdit }: Props) => {
   // initial load via hook (keeps behavior identical)
   const { data: hookData } = useArtist(dataQuery);
   const [artists, setArtists] = useState<Artist[]>([]);
@@ -27,6 +28,7 @@ const ProgramGrid = ({ dataQuery, isAdmin }: Props) => {
           artist={artist}
           isAdmin={isAdmin}
           onDeleted={(id) => setArtists((prev) => prev.filter((a) => a.id !== id))}
+          onEdit={onEdit}
         />
       ))}
     </div>

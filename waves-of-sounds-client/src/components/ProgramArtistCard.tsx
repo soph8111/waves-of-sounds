@@ -6,11 +6,11 @@ import apiClient from "../services/api-client";
 interface Props {
     artist: Artist;
     isAdmin?: boolean;  //vis knap kun for admin
-    // onUpdate?: (id: number) => void;                      
     onDeleted?: (id: number) => void;
+    onEdit?: (artist: Artist) => void;                     
   }
 
-  const ArtistCard = ({ artist, isAdmin = false, onDeleted }: Props) => {
+  const ArtistCard = ({ artist, isAdmin = false, onDeleted, onEdit }: Props) => {
     // console.log("ArtistCard isAdmin =", isAdmin);
 
     const handleDelete = async (e: React.MouseEvent) => {
@@ -28,19 +28,11 @@ interface Props {
     }
   }
 
-    // const handleUpdate = async (e: React.MouseEvent) => {
-    // e.preventDefault();
-    // e.stopPropagation();
-
-    // }
-    
-    // try {
-    //     await apiClient.put(`artists/${artist.id}`);
-    //     onUpdate?.(artist.id);
-    // } catch (err) {
-    //     console.error(err);
-    //     alert("Fejl: kunne ikke updatere artisten");
-    // }
+  const handleEdit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onEdit?.(artist);
+  };
 
 
   return (
@@ -62,14 +54,14 @@ interface Props {
         {/* Admin-only delete */}
         {isAdmin && (
           <>
-            {/* <button
+            <button
               type="button"
-              onClick={handleUpdate}
+              onClick={handleEdit}
               className="artist_update_btn"
               title="Update artist"
             >
-              Update artist
-            </button> */}
+              Edit artist
+            </button>
             <button
               type="button"
               onClick={handleDelete}

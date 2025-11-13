@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   HStack,
   Button,
@@ -18,11 +18,11 @@ import GenreSelector from "./ProgramSelectorGenre";
 import DateSelector from "./ProgramSelectorDate";
 import AdminNewArtistForm from "./AdminNewArtistForm";
 
-import { Artist } from "../hooks/useArtist";
+import useArtist, { Artist } from "../hooks/useArtist";
 import { Stage } from "../hooks/useStage";
 import { Genre } from "../hooks/useGenre";
 import { Article } from "../hooks/useArticle";
-import { Schedule } from "../hooks/useSchedule";
+import useSchedule, { Schedule } from "../hooks/useSchedule";
 
 export interface DataQuery {
   artist: Artist | null;
@@ -37,8 +37,47 @@ const Program = () => {
   const [dataQuery, setDataQuery] = useState<DataQuery>({} as DataQuery);
   const isAdmin = localStorage.getItem("isAdmin") === "true";
 
+  // Hooks: hent schedules + artists
+  const { data: schedules = [] } = useSchedule();
+  // Hent alle artists uden filtre - brug et tomt dataQuery hvis din hook kræver det
+  const { data: artists = [] } = useArtist({} as DataQuery);
+
   // Chakra modal kontrol
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [artistToEdit, setArtistToEdit] = useState<Artist | null>(null);
+
+    // Beregn occupied schedule ids (exclude current artist when editing)
+  // Når du åbner edit-modal sæt artistToEdit før modal åbnes (se openEdit below)
+  const occupiedScheduleIds = useMemo(() => {
+    const ids: number[] = [];
+    for (const a of artists) {
+      const sid = a?.schedule?.id;
+      if (typeof sid !== "number") continue;
+      // hvis vi redigerer en artist, skal vi IKKE markere denne artists egen schedule som occupied
+      if (artistToEdit && a.id === artistToEdit.id) continue;
+      ids.push(sid);
+    }
+    // fjern duplicates
+    return Array.from(new Set(ids));
+  }, [artists, artistToEdit]);
+
+  const openNewModal = () => {
+    setArtistToEdit(null);
+    onOpen();
+  };
+
+  const openEditModal = (artist: Artist) => {
+    setArtistToEdit(artist);
+    onOpen();
+  };
+
+  // // onSaved callback fra NewArtistForm: luk modal og triggere refresh
+  // const handleSaved = (savedArtist: Artist) => {
+  //   // Luk modal
+  //   onClose();
+  //   // Force ProgramGrid til at refetch (eller du kan opdatere lokale artists state)
+  // };
+
 
   return (
     <div className="container">
@@ -73,7 +112,7 @@ const Program = () => {
       {isAdmin && (
         <Button
           colorScheme="teal"
-          onClick={onOpen}
+          onClick={openNewModal}
           title="Add new artist to the program"
           mt={4}
         >
@@ -85,17 +124,20 @@ const Program = () => {
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add New Artist</ModalHeader>
+          <ModalHeader>{artistToEdit ? "Edit Artist" : "Add New Artist"}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <AdminNewArtistForm
+              artistToEdit={artistToEdit ?? undefined}
+              schedules={schedules}
+              occupiedScheduleIds={occupiedScheduleIds}
               onSaved={() => {
-                onClose(); // Luk modal efter save
+                onClose();
                 globalThis.location.reload(); // midlertidigt: reload program for at vise ny artist
               }}
+              onCancel={() => onClose()}
             />
           </ModalBody>
-
           <ModalFooter>
             <Button onClick={onClose} variant="ghost">
               Close
@@ -105,8 +147,12 @@ const Program = () => {
       </Modal>
 
       {/* Program grid */}
-      <ProgramGrid dataQuery={dataQuery} isAdmin={isAdmin} />
-    </div>
+      <ProgramGrid
+        dataQuery={dataQuery}
+        isAdmin={isAdmin}
+        onEdit={openEditModal}
+      />    
+      </div>
   );
 };
 

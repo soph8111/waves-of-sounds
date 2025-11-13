@@ -1,4 +1,217 @@
-import { useState } from "react";
+// import { useEffect, useState } from "react";
+// import apiClient from "../services/api-client";
+// import { Artist } from "../hooks/useArtist";
+
+// import AdminStageSelector from "./AdminNewArtistSelectorStage";
+// import AdminScheduleSelector from "./AdminNewArtistSelectorSchedule";
+// import AdminGenreSelector from "./AdminNewArtistSelectorGenre";
+
+// interface Stage {
+//   id: number;
+//   name: string;
+// }
+// interface Schedule {
+//   id: number;
+//   startDate: string;
+//   endDate: string;
+//   startTime: string;
+//   endTime: string;
+// }
+
+// interface Props {
+//   artistToEdit?: Artist | null;
+//   onSaved?: (savedArtist: Artist) => void;
+//   onCancel?: () => void;
+// }
+
+// const NewArtistForm = ({ artistToEdit = null, onSaved, onCancel }: Props) => {
+//   // Form fields
+//   const [name, setName] = useState("");
+//   const [bio, setBio] = useState("");
+//   const [spotify, setSpotify] = useState("");
+//   const [image, setImage] = useState("");
+
+//   // Dropdowns
+//   const [selectedStage, setSelectedStage] = useState<Stage | null>(null);
+//   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
+//   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+
+//   // UI state
+//   const [message, setMessage] = useState("");
+//   const [loading, setLoading] = useState(false);
+
+//   // Prefill form when editing
+//   useEffect(() => {
+//     if (!artistToEdit) {
+//       // Reset for CREATE-mode
+//       setName("");
+//       setBio("");
+//       setSpotify("");
+//       setImage("");
+//       setSelectedStage(null);
+//       setSelectedSchedule(null);
+//       setSelectedGenres([]);
+//       setMessage("");
+//       return;
+//     }
+
+//     // Fill fields in EDIT-mode
+//     setName(artistToEdit.name);
+//     setBio(artistToEdit.bio);
+//     setSpotify(artistToEdit.spotify);
+//     setImage(artistToEdit.image);
+
+//     // stage is a number in your hook
+//     setSelectedStage({ id: artistToEdit.stage, name: "" });
+
+//     // schedule is an object
+//     setSelectedSchedule(artistToEdit.schedule);
+
+//     // genres = array of Genre objects → extract ids
+//     setSelectedGenres(artistToEdit.genres.map((g) => g.id));
+
+//     setMessage("");
+//   }, [artistToEdit]);
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setMessage("");
+
+//     if (!name || !selectedStage || !selectedSchedule) {
+//       setMessage("Please fill name, stage, and schedule.");
+//       return;
+//     }
+
+//     setLoading(true);
+
+//     const payload = {
+//       name,
+//       bio,
+//       spotify,
+//       image,
+//       stageId: selectedStage.id,
+//       scheduleId: selectedSchedule.id,
+//       genreIds: selectedGenres,
+//     };
+
+//     try {
+//       let savedArtist: Artist;
+
+//       if (artistToEdit) {
+//         // UPDATE
+//         const res = await apiClient.put(`/artists/${artistToEdit.id}`, payload);
+//         savedArtist = res.data;
+//         setMessage("Artist updated!");
+//       } else {
+//         // CREATE
+//         const res = await apiClient.post("/artists", payload);
+//         savedArtist = res.data;
+//         setMessage("Artist created!");
+
+//         // reset after successful create
+//         setName("");
+//         setBio("");
+//         setSpotify("");
+//         setImage("");
+//         setSelectedStage(null);
+//         setSelectedSchedule(null);
+//         setSelectedGenres([]);
+//       }
+
+//       onSaved?.(savedArtist);
+//     } catch (err) {
+//       console.error("Error saving:", err);
+//       setMessage("Something went wrong. Check console.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+  
+//   let buttonLabel = "Add Artist";
+  
+//   if (loading) {
+//     buttonLabel = "Saving…";
+//   } else if (artistToEdit) {
+//     buttonLabel = "Update Artist";
+//   }
+
+//   return (
+//     <div className="admin-form">
+//       <h2>{artistToEdit ? "Edit Artist" : "Add New Artist"}</h2>
+
+//       <form onSubmit={handleSubmit}>
+//         <input
+//           type="text"
+//           placeholder="Artist name"
+//           value={name}
+//           onChange={(e) => setName(e.target.value)}
+//         />
+
+//         <textarea
+//           placeholder="Artist bio"
+//           value={bio}
+//           onChange={(e) => setBio(e.target.value)}
+//         />
+
+//         <input
+//           type="text"
+//           placeholder="Spotify embed URL"
+//           value={spotify}
+//           onChange={(e) => setSpotify(e.target.value)}
+//         />
+
+//         <input
+//           type="text"
+//           placeholder="/img/artists/example.jpg"
+//           value={image}
+//           onChange={(e) => setImage(e.target.value)}
+//         />
+
+//         {/* Stage dropdown */}
+//         <AdminStageSelector
+//           selectedStage={selectedStage}
+//           onSelectStage={setSelectedStage}
+//         />
+
+//         {/* Schedule dropdown */}
+//         <AdminScheduleSelector
+//           selectedSchedule={selectedSchedule}
+//           onSelectSchedule={setSelectedSchedule}
+//         />
+
+//         {/* Genres multi-select */}
+//         <AdminGenreSelector
+//           selectedGenres={selectedGenres}
+//           onSelectGenres={setSelectedGenres}
+//         />
+
+//         <div style={{ marginTop: 12 }}>
+//           <button type="submit" disabled={loading}>
+//             {buttonLabel}
+//             </button>
+
+//           {onCancel && (
+//             <button
+//               type="button"
+//               onClick={onCancel}
+//               disabled={loading}
+//               style={{ marginLeft: 8 }}
+//             >
+//               Cancel
+//             </button>
+//           )}
+//         </div>
+//       </form>
+
+//       {message && <p>{message}</p>}
+//     </div>
+//   );
+// };
+
+// export default NewArtistForm;
+
+import { AxiosError } from "axios";
+import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
 import { Artist } from "../hooks/useArtist";
@@ -7,62 +220,42 @@ import AdminStageSelector from "./AdminNewArtistSelectorStage";
 import AdminScheduleSelector from "./AdminNewArtistSelectorSchedule";
 import AdminGenreSelector from "./AdminNewArtistSelectorGenre";
 
-interface Stage {
-  id: number;
-  name: string;
-}
-
-interface Schedule {
-  id: number;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
-}
+import { Stage } from "../hooks/useStage";
+import { Schedule } from "../hooks/useSchedule";
 
 interface Props {
-  onSaved?: (savedArtist: Artist) => void;
+  artistToEdit?: Artist | null;
+  schedules: Schedule[];          // alle schedules kommer fra parent
+  occupiedScheduleIds: number[];  // parent giver id'er der er optaget
+  onSaved?: (saved: Artist) => void;
+  onCancel?: () => void;
 }
 
-const NewArtistForm = ( { onSaved }: Props) => {
-  // Form fields
+const NewArtistForm = ({
+  artistToEdit = null,
+  schedules,
+  occupiedScheduleIds,
+  onSaved,
+  onCancel,
+}: Props) => {
+
+  // ---------------- FORM STATE ----------------
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [spotify, setSpotify] = useState("");
   const [image, setImage] = useState("");
 
-  // Related selections
   const [selectedStage, setSelectedStage] = useState<Stage | null>(null);
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
 
-  // Feedback message
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
 
-    // Basic validation
-    if (!name || !selectedStage || !selectedSchedule) {
-      setMessage("Please fill in all required fields (name, stage, schedule).");
-      return;
-    }
-
-    try {
-      // Send data to backend
-      const response = await apiClient.post("/artists", {
-        name,
-        bio,
-        spotify,
-        image,
-        stageId: selectedStage.id,
-        scheduleId: selectedSchedule.id,
-        genreIds: selectedGenres,
-      });
-      
-      const savedArtist: Artist = response.data;
-
-      // Reset form
+  // ---------------- PREFILL FORM WHEN EDITING ----------------
+  useEffect(() => {
+    if (!artistToEdit) {
       setName("");
       setBio("");
       setSpotify("");
@@ -70,70 +263,192 @@ const NewArtistForm = ( { onSaved }: Props) => {
       setSelectedStage(null);
       setSelectedSchedule(null);
       setSelectedGenres([]);
+      setMessage("");
+      return;
+    }
 
-      setMessage("Artist added successfully!");
+    setName(artistToEdit.name ?? "");
+    setBio(artistToEdit.bio ?? "");
+    setSpotify(artistToEdit.spotify ?? "");
+    setImage(artistToEdit.image ?? "");
 
-      // Notify parent
-      onSaved?.(savedArtist);
+    setSelectedStage({ id: artistToEdit.stage, name: "" });
+    setSelectedSchedule(artistToEdit.schedule ?? null);
 
-    } catch (error) {
-      console.error("Error adding artist:", error);
-      setMessage("Could not add artist.");
+    setSelectedGenres((artistToEdit.genres || []).map((g) => g.id));
+    setMessage("");
+  }, [artistToEdit]);
+
+
+  // ---------------- HANDLE SUBMIT ----------------
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (!name || !selectedStage || !selectedSchedule) {
+      setMessage("Please fill in name, stage and schedule.");
+      return;
+    }
+
+    // extra safety: prevent selecting an occupied schedule in create-mode
+    if (!artistToEdit && occupiedScheduleIds.includes(selectedSchedule.id)) {
+      setMessage("Selected schedule is already occupied. Choose another.");
+      return;
+    }
+
+    // in edit-mode allow keeping the same schedule even if occupied (owner)
+    if (
+      artistToEdit &&
+      occupiedScheduleIds.includes(selectedSchedule.id) &&
+      selectedSchedule.id !== (artistToEdit.schedule?.id ?? null)
+    ) {
+      setMessage("Selected schedule is occupied by another artist. Choose another.");
+      return;
+    }
+
+    setLoading(true);
+
+    const payload = {
+      name,
+      bio,
+      spotify,
+      image,
+      stageId: selectedStage.id,
+      scheduleId: selectedSchedule.id,
+      genreIds: selectedGenres,
+    };
+
+    try {
+      let saved: Artist;
+
+      if (artistToEdit) {
+        // PUT UPDATE
+        const res = await apiClient.put(`/artists/${artistToEdit.id}`, payload);
+        saved = res.data;
+        setMessage("Artist updated!");
+      } else {
+        // POST CREATE
+        const res = await apiClient.post("/artists", payload);
+        saved = res.data;
+        setMessage("Artist created!");
+
+        // Reset after create
+        setName("");
+        setBio("");
+        setSpotify("");
+        setImage("");
+        setSelectedStage(null);
+        setSelectedSchedule(null);
+        setSelectedGenres([]);
+      }
+
+      onSaved?.(saved);
+
+        } catch (err) {
+      console.error("Error saving:", err);
+
+      // Gør TypeScript glad ved at fortælle hvilken type Axios fejl har
+      const error = err as AxiosError<{ error?: string; message?: string }>;
+
+      // Hent HTTP-statuskode (fx 409)
+      const status = error.response?.status;
+
+      // Hent fejlbesked fra serveren
+      const serverMsg =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Unknown error";
+
+      console.error("Error:", status, serverMsg);
+
+      // Hvis backend siger 409 — schedule er allerede taget
+      if (status === 409) {
+        setMessage(serverMsg || "Conflict: schedule already assigned to another artist.");
+      } else {
+        setMessage("Something went wrong — check console.");
+      }
+
+    } finally {
+      setLoading(false);
     }
   };
 
+
+  // ---------------- BUTTON LABEL ----------------
+  let buttonLabel = "Add Artist";
+  if (loading) buttonLabel = "Saving…";
+  else if (artistToEdit) buttonLabel = "Update Artist";
+
+
   return (
     <div className="admin-form">
-      <h2>Add New Artist</h2>
+      <h2>{artistToEdit ? "Edit Artist" : "Add New Artist"}</h2>
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Artist Name"
+          placeholder="Artist name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          required
         />
 
         <textarea
-          placeholder="Artist Bio"
+          placeholder="Artist bio"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
 
         <input
           type="text"
-          placeholder="Spotify Embed URL"
+          placeholder="Spotify embed URL"
           value={spotify}
           onChange={(e) => setSpotify(e.target.value)}
         />
 
         <input
           type="text"
-          placeholder="Image Path (e.g. /img/artists/artist.jpg)"
+          placeholder="/img/artists/example.jpg"
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
 
-        {/* Stage dropdown */}
+        {/* Stage */}
         <AdminStageSelector
           selectedStage={selectedStage}
           onSelectStage={setSelectedStage}
         />
 
-        {/* Schedule dropdown */}
+        {/* Schedule — nu med occupied schedules */}
         <AdminScheduleSelector
           selectedSchedule={selectedSchedule}
           onSelectSchedule={setSelectedSchedule}
+          schedules={schedules}
+          occupiedIds={occupiedScheduleIds}
         />
 
-        {/* Genre multi-select */}
+        {/* Genres */}
         <AdminGenreSelector
           selectedGenres={selectedGenres}
           onSelectGenres={setSelectedGenres}
         />
 
-        <button type="submit">Add Artist</button>
+        {/* Buttons */}
+        <div style={{ marginTop: 12 }}>
+          <button type="submit" disabled={loading}>
+            {buttonLabel}
+          </button>
+
+          {onCancel && (
+            <button
+              type="button"
+              onClick={onCancel}
+              disabled={loading}
+              style={{ marginLeft: 8 }}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
 
       {message && <p>{message}</p>}
@@ -141,4 +456,4 @@ const NewArtistForm = ( { onSaved }: Props) => {
   );
 };
 
-export default NewArtistForm;
+export default NewArtistForm

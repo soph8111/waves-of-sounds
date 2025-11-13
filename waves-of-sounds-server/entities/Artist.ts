@@ -31,10 +31,10 @@ export class Artist {
   @Column("varchar", { name: "image", nullable: true, length: 225 })
   image?: string | null;
 
-  @Column("int", { primary: true, name: "schedule_id" })
+  @Column("int", { name: "schedule_id" })
   scheduleId?: number;
 
-  @Column("int", { primary: true, name: "stage_id" })
+  @Column("int", { name: "stage_id" })
   stageId?: number;
 
   @ManyToOne(() => Schedule, (schedule) => schedule.artists, {
