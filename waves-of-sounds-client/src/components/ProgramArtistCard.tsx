@@ -5,7 +5,8 @@ import apiClient from "../services/api-client";
 
 interface Props {
     artist: Artist;
-    isAdmin?: boolean;                       // <- vis knap kun for admin
+    isAdmin?: boolean;  //vis knap kun for admin
+    // onUpdate?: (id: number) => void;                      
     onDeleted?: (id: number) => void;
   }
 
@@ -25,7 +26,22 @@ interface Props {
         console.error(err);
         alert("Fejl: kunne ikke slette artist.");
     }
-    };
+  }
+
+    // const handleUpdate = async (e: React.MouseEvent) => {
+    // e.preventDefault();
+    // e.stopPropagation();
+
+    // }
+    
+    // try {
+    //     await apiClient.put(`artists/${artist.id}`);
+    //     onUpdate?.(artist.id);
+    // } catch (err) {
+    //     console.error(err);
+    //     alert("Fejl: kunne ikke updatere artisten");
+    // }
+
 
   return (
     <div className="artist_card" key={artist.id}>
@@ -45,14 +61,24 @@ interface Props {
 
         {/* Admin-only delete */}
         {isAdmin && (
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="artist_delete_btn"
-            title="Delete from program"
-          >
-            Delete from program
-          </button>
+          <>
+            {/* <button
+              type="button"
+              onClick={handleUpdate}
+              className="artist_update_btn"
+              title="Update artist"
+            >
+              Update artist
+            </button> */}
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="artist_delete_btn"
+              title="Delete from program"
+            >
+              Delete from program
+            </button>
+          </>
         )}
       </div>
     </div>

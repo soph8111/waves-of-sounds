@@ -1,6 +1,8 @@
 import { useState } from "react";
 import apiClient from "../services/api-client";
 
+import { Artist } from "../hooks/useArtist";
+
 import AdminStageSelector from "./AdminNewArtistSelectorStage";
 import AdminScheduleSelector from "./AdminNewArtistSelectorSchedule";
 import AdminGenreSelector from "./AdminNewArtistSelectorGenre";
@@ -18,7 +20,11 @@ interface Schedule {
   endTime: string;
 }
 
-const NewArtistForm = () => {
+interface Props {
+  onSaved?: (savedArtist: Artist) => void;
+}
+
+const NewArtistForm = ( { onSaved }: Props) => {
   // Form fields
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -43,7 +49,7 @@ const NewArtistForm = () => {
     }
 
     try {
-      // 🧩 Send data to backend
+      // Send data to backend
       const response = await apiClient.post("/artists", {
         name,
         bio,
@@ -53,22 +59,26 @@ const NewArtistForm = () => {
         scheduleId: selectedSchedule.id,
         genreIds: selectedGenres,
       });
+      
+      const savedArtist: Artist = response.data;
 
-      if (response.status === 201 || response.status === 200) {
-        setMessage("Artist added successfully!");
-        setName("");
-        setBio("");
-        setSpotify("");
-        setImage("");
-        setSelectedStage(null);
-        setSelectedSchedule(null);
-        setSelectedGenres([]);
-      } else {
-        setMessage("⚠️ Something went wrong while adding the artist.");
-      }
+      // Reset form
+      setName("");
+      setBio("");
+      setSpotify("");
+      setImage("");
+      setSelectedStage(null);
+      setSelectedSchedule(null);
+      setSelectedGenres([]);
+
+      setMessage("Artist added successfully!");
+
+      // Notify parent
+      onSaved?.(savedArtist);
+
     } catch (error) {
       console.error("Error adding artist:", error);
-      setMessage("Could not add artist. Check console for details.");
+      setMessage("Could not add artist.");
     }
   };
 

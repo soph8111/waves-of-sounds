@@ -1,37 +1,40 @@
+// src/components/ProgramGrid.tsx
 import { useEffect, useState } from "react";
-import useArtist, { Artist } from "../hooks/useArtist";
 import ArtistCard from "./ProgramArtistCard";
+import useArtist, { Artist } from "../hooks/useArtist";
 import { DataQuery } from "./ProgramContainer";
 
 interface Props {
   dataQuery: DataQuery;
-  isAdmin: boolean; 
+  isAdmin: boolean;
 }
 
 const ProgramGrid = ({ dataQuery, isAdmin }: Props) => {
-  const { data } = useArtist(dataQuery);
+  // initial load via hook (keeps behavior identical)
+  const { data: hookData } = useArtist(dataQuery);
   const [artists, setArtists] = useState<Artist[]>([]);
-  
-  useEffect(() => {
-    if (data) setArtists(data);
-  }, [data]);
 
-    return (
+  // sync initial hook data
+  useEffect(() => {
+    if (hookData) setArtists(hookData);
+  }, [hookData]);
+
+  return (
     <div id="artist_grid">
-    {artists.map((artist) => (
-          <ArtistCard 
-          key={artist.id} 
-          artist={artist} 
+      {artists.map((artist) => (
+        <ArtistCard
+          key={artist.id}
+          artist={artist}
           isAdmin={isAdmin}
-          onDeleted={(id) => 
-            setArtists((prev) => prev.filter((a) => a.id !== id))}
-          />
+          onDeleted={(id) => setArtists((prev) => prev.filter((a) => a.id !== id))}
+        />
       ))}
     </div>
   );
-  }
+};
 
-export default ProgramGrid
+export default ProgramGrid;
+
 
 // import useArtist from "../hooks/useArtist";
 // import ArtistCard from "./ProgramArtistCard";
