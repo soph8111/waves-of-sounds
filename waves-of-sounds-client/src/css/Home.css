@@ -40,3 +40,35 @@
     transition: all 0.4s ease;
   }
 
+  .latest_news {
+    overflow: auto;
+    white-space: nowrap;
+    margin: 0 -2em;
+    padding: 0 0 1.2em;
+
+    .article_grid {
+      overflow: auto;
+      width: auto;
+      display: inline-flex;
+      gap: 2em;
+      padding: 0 2em;
+    }
+
+    .article_card {
+      width: 270px;
+    }
+  }
+
+  /* Styling desktop  */
+@media (min-width: 992px) { 
+
+  .latest_news {
+    margin: 0 -10em;
+
+    .article_grid {
+      padding: 0 10em;
+    }
+  }
+
+}
+

@@ -21,7 +21,7 @@ const ProgramGrid = ({ dataQuery, isAdmin, onEdit }: Props) => {
   }, [hookData]);
 
   return (
-    <div id="artist_grid">
+    <div className="artist_grid">
       {artists.map((artist) => (
         <ArtistCard
           key={artist.id}

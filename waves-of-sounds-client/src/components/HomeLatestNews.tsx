@@ -8,10 +8,12 @@ const LatestNews = () => {
         return (
           <div className="container">
             <h1>latest news</h1>
-            <div id="article_grid">
-            {articles.map((article) => (
+            <div className="latest_news">
+              <div className="article_grid">
+              {articles.map((article) => (
                   <ArticleCard key={article.id} article={article} />
               ))}
+              </div>
             </div>
           </div>
       );
