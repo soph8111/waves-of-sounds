@@ -46,7 +46,7 @@ const Program = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [artistToEdit, setArtistToEdit] = useState<Artist | null>(null);
 
-    // Beregn occupied schedule ids (exclude current artist when editing)
+  // Beregn occupied schedule ids (exclude current artist when editing)
   // Når du åbner edit-modal sæt artistToEdit før modal åbnes (se openEdit below)
   const occupiedScheduleIds = useMemo(() => {
     const ids: number[] = [];
