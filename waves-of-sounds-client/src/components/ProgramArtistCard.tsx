@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Artist } from "../hooks/useArtist";
 import apiClient from "../services/api-client";
 
+import useStage from "../hooks/useStage";
+
+
 interface Props {
     artist: Artist;
     isAdmin?: boolean;  //vis knap kun for admin
@@ -12,6 +15,9 @@ interface Props {
 
   const ArtistCard = ({ artist, isAdmin = false, onDeleted, onEdit }: Props) => {
     // console.log("ArtistCard isAdmin =", isAdmin);
+
+    const { data: stages = [] } = useStage();
+    const stageName = stages.find((s) => s.id === artist.stage)?.name || "";
 
     const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -36,65 +42,53 @@ interface Props {
 
 
   return (
-    <div className="artist_card" key={artist.id}>
-      <img src={artist.image} alt={artist.name} />
-      <div className="artist_card_info">
-        <Link
-          to={`/artist/${artist.name}`}
-          relative="path"
-          state={artist}
-          className="artist_name"
-        >
-          {artist.name}
-        </Link>
-
-        <p className="artist_time">{artist.schedule.startTime.slice(0, 5)}</p>
-        <p className="artist_date">{artist.schedule.startDate}</p>
-
-        {/* Admin-only delete */}
-        {isAdmin && (
-          <>
-            <button
-              type="button"
-              onClick={handleEdit}
-              className="artist_update_btn"
-              title="Update artist"
-            >
-              Edit artist
-            </button>
-            <button
-              type="button"
-              onClick={handleDelete}
-              className="artist_delete_btn"
-              title="Delete from program"
-            >
-              Delete from program
-            </button>
-          </>
-        )}
-      </div>
-    </div>
+    <Link
+      to={`/artist/${artist.name}`}
+      relative="path"
+      state={artist}
+      >
+        <div className="artist_card" key={artist.id}>
+          <img 
+          src={artist.image} 
+          alt={artist.name} 
+          onError={(e) => {
+            e.currentTarget.src = "./public/img/artists/placeholder.jpg";
+          }}
+          />
+          
+          <div className="artist_card_info">
+            <p className="artist_name">{artist.name}</p>
+            <p className="artist_date">{artist.schedule.startDate}</p>
+            <p className="artist_time">{artist.schedule.startTime.slice(0, 5)}</p>
+            <p className="artist_stage">{stageName}</p>
+          </div>
+          
+          {/* Admin-only delete */}
+          {isAdmin && (
+            <>
+              <button
+                type="button"
+                onClick={handleEdit}
+                className="artist_update_btn"
+                title="Update artist"
+              >
+                Edit artist
+              </button>
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="artist_delete_btn"
+                title="Delete from program"
+              >
+                Delete from program
+              </button>
+            </>
+          )}
+        </div>
+    </Link>
   );
 };
 
 export default ArtistCard;
-
-//   const ArtistCard = ({ artist }: Props) => {
-    
-//     return (
-
-//         <div className="artist_card" key={artist.id} >
-//             <img src={artist.image} alt={artist.name} />
-//             <div className="artist_card_info">
-//                 <Link to={`/artist/${artist.name}`} relative="path" state={artist} className="artist_name">{artist.name}</Link>
-//                 <p className="artist_time">{artist.schedule.startTime.slice(0, 5)}</p>
-//                 <p className="artist_date">{artist.schedule.startDate}</p>
-//             </div>
-//         </div>
-
-//     );
-//   }
-
-//   export default ArtistCard 
 
 

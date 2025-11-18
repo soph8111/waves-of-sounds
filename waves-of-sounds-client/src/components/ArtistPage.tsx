@@ -11,7 +11,10 @@ export default function  ArtistPage () {
             <h1>{artist.name}</h1>
             <p className='intro_text'>{artist.bio}</p>
         </div>
-        <img className='artist_img' src={artist.image} alt={artist.name} />
+        <img 
+        className='artist_img' 
+        src={artist.image} alt={artist.name} 
+        />
     </div>
     <iframe
     title={artist.name}

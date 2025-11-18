@@ -12,7 +12,13 @@ export default function  ArticlePage () {
             <h1>{article.title}</h1>
             <p>{article.article}</p>
         </div>
-        <img className='article_img' src={article.image} alt={article.title} />
+        <img 
+        className='article_img' 
+        src={article.image} 
+        alt={article.title} 
+        onError={(e) => {
+            e.currentTarget.src = "./public/img/article/placeholder.jpg";
+          }}/>
     </div>
   )
 }
