@@ -15,10 +15,65 @@
     text-align: center;
 }
 
+#newsletterContainer {
+  margin: 2em;
+
+  h3 {
+    font-size: 1em;
+    font-style: italic;
+  }
+}
+
+#admin_nav {
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
+  .link_adminpage,
+  .button_to_adminpage {
+    color: var(--main-color-blue);
+    text-decoration: underline;
+    font-size: 0.8em;
+    font-family: var(--main-font-bold);
+    margin: 0 1em;
+    width: fit-content;
+  }
+
+  button {
+    background: none;
+  }
+
+  form {
+    border: none;
+    display: flex;
+    align-items: center;
+
+    input {
+      border: 1px solid #d8d8d8;
+    }
+  }
+}
+
   /* Styling desktop  */
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     #banner {
         font-size: 1.1em;
     }
-  }
+
+    #newsletterContainer {
+      margin: 2em 10em;
+
+      h3 {
+        font-size: 1.5em;
+      }
+    }
+
+    #admin_nav {
+      .link_adminpage,
+      .button_to_adminpage {
+        margin: 1em;
+      }
+    }
+}

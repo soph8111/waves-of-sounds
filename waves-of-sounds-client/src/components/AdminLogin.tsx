@@ -1,7 +1,8 @@
 // AdminLogin.tsx
 import { useState, useEffect } from "react";
-import { Box, Button, FormControl, FormLabel, Input, Alert, AlertIcon } from "@chakra-ui/react";
+import { Box, Button, Input, Alert, AlertIcon } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -49,29 +50,23 @@ export default function AdminLogin() {
     setLoading(false);
   };
 
-  // ✅ Hvis admin er logget ind, vis KUN log ud-knap
+  // Hvis admin er logget ind, vis KUN log ud-knap
   if (isAdmin) {
     return (
-      <Box maxW="sm" p={6} borderWidth="1px" borderRadius="lg">
-        <Button colorScheme="red" w="full" onClick={handleLogout}>
+      <>
+        <Link className="link_adminpage" to="./admin">Admin page</Link>
+        <Button className="button_to_adminpage" onClick={handleLogout}>
             Log out 
         </Button>
-      </Box>
+      </>
     );
   }
 
-  // ✅ Ellers: vis login-formular
+  // Ellers: vis login-formular
   return (
     <Box as="form" onSubmit={handleSubmit} maxW="sm" p={6} borderWidth="1px" borderRadius="lg">
-      <FormControl mb={4} isRequired>
-        <FormLabel>Email</FormLabel>
-        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@admin.dk" />
-      </FormControl>
-
-      <FormControl mb={4} isRequired>
-        <FormLabel>Password</FormLabel>
-        <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
-      </FormControl>
+      <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" isRequired />
+      <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" isRequired />
 
       {error && (
         <Alert status="error" mb={4}>
@@ -80,7 +75,7 @@ export default function AdminLogin() {
         </Alert>
       )}
 
-      <Button type="submit" colorScheme="blue" isLoading={loading} w="full">
+      <Button type="submit" isLoading={loading} w="full" className="button_to_adminpage">
         Log ind
       </Button>
     </Box>

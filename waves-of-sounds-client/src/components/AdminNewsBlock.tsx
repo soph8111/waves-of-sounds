@@ -3,8 +3,14 @@
 
 import { useState } from "react";
 import apiClient from "../services/api-client";
+import { Article } from "../hooks/useArticle";
 
-const NewArticleForm = () => {
+interface Props {// parent giver id'er der er optaget
+  onSaved?: (saved: Article) => void;
+  // onCancel?: () => void;
+}
+
+const NewArticleForm = ( {onSaved} : Props) => {
   // States for form fields
   const [title, setTitle] = useState("");
   const [article, setArticle] = useState("");
@@ -19,6 +25,12 @@ const NewArticleForm = () => {
     e.preventDefault();
 
     try {
+
+            const payload = { title: title.trim(), article: article.trim(), image: image.trim() || null, date: date || null };
+
+      // Antager apiClient er en axios-instans — axios returnerer { data }
+      const res = await apiClient.post<Article>("/articles", payload);
+
       // Sending POST request with form data
       await apiClient.post("/articles", {
         title,
@@ -34,7 +46,10 @@ const NewArticleForm = () => {
       setImage("");
       setDate("");
 
-    } catch (error) {
+      onSaved?.(res.data);
+    } 
+    
+    catch (error) {
       setMessage("There was an error, please try again later.");
       console.error(error);
     }

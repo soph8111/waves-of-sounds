@@ -70,16 +70,46 @@ button {
 
 .styled_button {
   background-color: var(--main-color-blue);
-  height: 30px;
+  min-height: 30px;
   place-content: center;
   color: var(--main-color-white);
   border-radius: 10px;
   font-family: var(--main-font-bold);
   font-size: 0.7em;
+  padding: 0 1em;
+  min-width: 120px;
+  width: fit-content;
 }
 
+/* Form */
+form {
+  display: grid;
+  gap: 0.5em;
+
+  input, textarea, select {
+    padding: 0.5em;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+  }
+
+  #select_genres {
+    display: grid;
+    gap: 0.5em;
+  }
+
+  label {
+    display: flex;
+    gap: 5px;
+  }
+
+  button {
+        float: right;
+  }
+}
+
+
 /* Styling desktop  */
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   
   .container {
     margin: 100px 10em 0;

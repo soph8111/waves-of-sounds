@@ -9,9 +9,13 @@ const Footer = () => {
             <p>17 - 19 juli 2025</p>
             <p>17 - 19 juli 2025</p>
         </div>
-        <p>don't miss out on great news</p>
-        <NewsletterForm />
-        <AdminLogin />
+        <div id="newsletterContainer">
+            <h3>Don't miss out on great news</h3>
+            <NewsletterForm />
+        </div>
+        <div id="admin_nav">
+            <AdminLogin />
+        </div>
     </div>
     );
 };

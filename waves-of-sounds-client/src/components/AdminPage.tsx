@@ -1,7 +1,6 @@
 // AdminPage.tsx
 import { Button, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import NewArtistForm from "./AdminNewArtistForm";
 import NewArticleForm from "./AdminNewsBlock";
 
 export default function AdminPage() {
@@ -17,7 +16,6 @@ export default function AdminPage() {
       <Heading mb={4}>Admin</Heading>
       <Button onClick={handleLogout}>Log ud</Button>
 
-      <NewArtistForm></NewArtistForm>
       <NewArticleForm></NewArticleForm>
     </div>
   );

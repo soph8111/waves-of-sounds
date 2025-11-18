@@ -44,7 +44,7 @@ const Newsletter = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit">Subscribe</button>
+        <button type="submit" className="styled_button" >Subscribe</button>
       </form>
       {message && <p>{message}</p>}
     </div>

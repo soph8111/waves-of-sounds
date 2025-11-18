@@ -10,28 +10,31 @@ import ArticlePage from "./components/ArticlePage"
 import ArtistPage from "./components/ArtistPage"
 import AdminPage from "./components/AdminPage"
 import AdminRequire from "./components/AdminRequire"
+import { ChakraProvider } from '@chakra-ui/react'
+
+
 function App() {
 
   return (
-    <>
-    <NavBar />
-    <Routes> 
-      <Route path="/" element={<Home />} />
-      <Route path="/program" element={<Program />} />
-      <Route path="/news" element={<News />} />
-      <Route path="/volunteers" element={<Volunteers />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/artist/:slug" element={<ArtistPage />} />
-      <Route path="/news/:slug" element={<ArticlePage />} />
-      
-      
-      <Route element={<AdminRequire />}>
-          <Route path="/admin" element={<AdminPage />} />
-        </Route>
+    <ChakraProvider>
+      <NavBar />
+      <Routes> 
+        <Route path="/" element={<Home />} />
+        <Route path="/program" element={<Program />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/volunteers" element={<Volunteers />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/artist/:slug" element={<ArtistPage />} />
+        <Route path="/news/:slug" element={<ArticlePage />} />
+        
+        
+        <Route element={<AdminRequire />}>
+            <Route path="/admin" element={<AdminPage />} />
+          </Route>
 
-    </Routes>
-    <Footer />
-    </>
+      </Routes>
+      <Footer />
+    </ChakraProvider>
   )
 }
 

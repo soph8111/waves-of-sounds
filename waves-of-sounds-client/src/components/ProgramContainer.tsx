@@ -1,14 +1,11 @@
 import { useMemo, useState } from "react";
 import {
   HStack,
-  Button,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
 
@@ -32,6 +29,8 @@ export interface DataQuery {
   genre: Genre | null;
   article: Article | null;
 }
+
+
 
 const Program = () => {
   const [dataQuery, setDataQuery] = useState<DataQuery>({} as DataQuery);
@@ -78,10 +77,9 @@ const Program = () => {
   //   // Force ProgramGrid til at refetch (eller du kan opdatere lokale artists state)
   // };
 
-
   return (
     <div className="container">
-      <h1>Program</h1>
+      <h1>program</h1>
       <p className="intro_text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
         ultrices tincidunt sodales. Suspendisse porta, lacus eget sodales
@@ -94,9 +92,10 @@ const Program = () => {
           onSelectStage={(stage) => setDataQuery({ ...dataQuery, stage })}
         />
         <DateSelector
-          selectedSchedule={dataQuery.schedule}
-          onSelectSchedule={(schedule) =>
-            setDataQuery({ ...dataQuery, schedule })
+          schedules={schedules}
+          selectedScheduleDate={dataQuery.scheduleDate}
+          onSelectScheduleDate={(scheduleDate) =>
+            setDataQuery({ ...dataQuery, schedule: null, scheduleDate })
           }
         />
         <GenreSelector
@@ -105,26 +104,23 @@ const Program = () => {
         />
       </HStack>
 
-      <h2 className="program_day">Placeholder: dag</h2>
-      <h3 className="program_date">Placeholder: dato</h3>
       <hr />
 
       {isAdmin && (
-        <Button
-          colorScheme="teal"
+        <button
+          style={ {margin : "2em 0"}}
+          className="styled_button"
           onClick={openNewModal}
           title="Add new artist to the program"
-          mt={4}
         >
           Add new artist to the program
-        </Button>
+        </button>
       )}
 
       {/* Modal (pop-up) */}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{artistToEdit ? "Edit Artist" : "Add New Artist"}</ModalHeader>
+        <ModalContent p={4}>
           <ModalCloseButton />
           <ModalBody>
             <AdminNewArtistForm
@@ -135,14 +131,9 @@ const Program = () => {
                 onClose();
                 globalThis.location.reload(); // midlertidigt: reload program for at vise ny artist
               }}
-              onCancel={() => onClose()}
+              // onCancel={() => onClose()}
             />
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose} variant="ghost">
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
 

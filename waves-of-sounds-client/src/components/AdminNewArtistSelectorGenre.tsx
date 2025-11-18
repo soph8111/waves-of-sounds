@@ -17,19 +17,21 @@ const AdminGenreSelector = ({ selectedGenres, onSelectGenres }: Props) => {
   };
 
   return (
-    <div>
+    <>
       <h4>Select Genres</h4>
-      {genres.map((genre) => (
-        <label key={genre.id}>
-          <input
-            type="checkbox"
-            checked={selectedGenres.includes(genre.id)}
-            onChange={() => toggleGenre(genre.id)}
-          />
-          {genre.name}
-        </label>
-      ))}
-    </div>
+      <div id="select_genres">
+        {genres.map((genre) => (
+          <label key={genre.id}>
+            <input
+              type="checkbox"
+              checked={selectedGenres.includes(genre.id)}
+              onChange={() => toggleGenre(genre.id)}
+            />
+            {genre.name}
+          </label>
+        ))}
+      </div>
+    </>
   );
 };
 

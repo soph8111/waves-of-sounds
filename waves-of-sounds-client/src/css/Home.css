@@ -8,7 +8,7 @@
 
   #welcome_message {
     position: absolute;
-    top: 50%;
+    top: 50vh;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -60,7 +60,7 @@
   }
 
   /* Styling desktop  */
-@media (min-width: 992px) { 
+@media (min-width: 768px) { 
 
   .latest_news {
     margin: 0 -10em;
