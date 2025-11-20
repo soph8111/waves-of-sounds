@@ -10,12 +10,14 @@ interface Props {
     
     return (
 
+        <Link to={`/news/${article.title}`} relative="path" state={article}>
         <div className="article_card" key={article.id} >
             <img src={article.image} alt={article.title} />
             <div className="article_card_info">
-                <Link to={`/news/${article.title}`} relative="path" state={article}>{article.title}</Link>
+               {article.title}
             </div>
         </div>
+        </Link>
 
     );
   }

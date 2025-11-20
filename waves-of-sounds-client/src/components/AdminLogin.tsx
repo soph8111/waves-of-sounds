@@ -64,20 +64,20 @@ export default function AdminLogin() {
 
   // Ellers: vis login-formular
   return (
-    <Box as="form" onSubmit={handleSubmit} maxW="sm" p={6} borderWidth="1px" borderRadius="lg">
-      <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" isRequired />
-      <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" isRequired />
+      <Box as="form" onSubmit={handleSubmit} maxW="sm" p={6} borderWidth="1px" borderRadius="lg">
+        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Admin login" isRequired />
+        <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" isRequired />
 
-      {error && (
-        <Alert status="error" mb={4}>
-          <AlertIcon />
-          {error}
-        </Alert>
-      )}
+        {error && (
+          <Alert status="error" mb={4}>
+            <AlertIcon />
+            {error}
+          </Alert>
+        )}
 
-      <Button type="submit" isLoading={loading} w="full" className="button_to_adminpage">
-        Log ind
-      </Button>
-    </Box>
+        <Button type="submit" isLoading={loading} w="full" className="button_to_adminpage">
+          Log ind
+        </Button>
+      </Box>
   );
 }

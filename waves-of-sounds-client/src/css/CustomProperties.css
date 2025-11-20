@@ -51,6 +51,12 @@ h3 {
   margin-bottom: 0.8em;
 }
 
+h4 {
+  font-family: var(--main-font-bold);
+  font-size: 0.7em;
+  color: var(--main-color-white);
+}
+
 .intro_text{
   font-family: sans-serif;
   margin: 2em 0;

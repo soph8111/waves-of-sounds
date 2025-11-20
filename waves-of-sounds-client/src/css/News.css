@@ -1,8 +1,8 @@
 /* Article Grid */
 #article_grid {
-    display: grid;
+    display: flex;
     grid-gap: 3.5em;
-    grid-template-columns: repeat(auto-fit, 270px);
+    /* grid-template-columns: repeat(auto-fit, 1fr); */
     justify-content: center;
     margin: 2em 0;
 }
@@ -12,6 +12,8 @@
 .article_card {
     color: var(--main-color-blue);
     text-align: end;
+    width: 270px;
+    transition: all 0.4s ease;
 }
 
 .article_card_info {
@@ -27,7 +29,7 @@
 }
 
 /* Styling desktop  */
-@media (min-width: 992px) {
+@media (min-width: 768px) {
 
     .article_grid {
         display: grid;
@@ -36,10 +38,14 @@
     }
 
     .article_img {
-        width: 25em;
         height: 30em;
         justify-self: right;
         object-fit: cover;
+    }
+
+    .article_card:hover {
+    width: 370px;
+    transition: all 0.4s ease;
     }
 
 }
