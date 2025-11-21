@@ -80,14 +80,11 @@ form {
     padding: 0;
 
     input {
-    padding: 0.3em;
     border: 1.5px solid #d8d8d8;
-    font-size: 0.7em;
+    margin: 0;
+    font-size: 0.85em;
   }
-  
-  ::placeholder {
-    font-size: 0.7em;
-  }
+
   }
 }
 

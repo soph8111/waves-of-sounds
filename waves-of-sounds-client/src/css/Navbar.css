@@ -57,6 +57,7 @@
     font-size: 0.9em;
     text-decoration: none;
     color: var(--main-color-blue);
+    transition: all 0.3s ease;
   }
   
   .navbar a:hover {
