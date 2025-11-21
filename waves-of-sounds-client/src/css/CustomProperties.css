@@ -39,7 +39,7 @@ h1 {
 
 h2 {
   font-family: var(--main-font-bold);
-  font-size: 1em;
+  font-size: 1.2em;
   color: var(--main-color-blue);
   margin-bottom: 0.8em;
 }
@@ -64,6 +64,11 @@ h4 {
 
 .container {
   margin: 100px 2em 0;
+}
+
+.split_content {
+  display: grid;
+  gap: 2.5em;
 }
 
 /* Buttons */
@@ -98,6 +103,10 @@ form {
     border-radius: 10px;
   }
 
+  textarea {
+    height: 100px;
+  }
+
   #select_genres {
     display: grid;
     gap: 0.5em;
@@ -123,6 +132,12 @@ form {
 
   .intro_text {
     width: 28em;
+  }
+
+  .split_content {
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6em;
   }
 
 }

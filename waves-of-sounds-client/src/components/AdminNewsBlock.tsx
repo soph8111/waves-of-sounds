@@ -66,8 +66,7 @@ const NewArticleForm = ( {onSaved} : Props) => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <input
-          type="textarea"
+        <textarea
           placeholder="Article"
           value={article}
           onChange={(e) => setArticle(e.target.value)}
@@ -88,7 +87,7 @@ const NewArticleForm = ( {onSaved} : Props) => {
           required
         />
 
-        <button type="submit">Add article</button>
+        <button type="submit" className="styled_button">Add article</button>
       </form>
 
       {message && <p>{message}</p>}

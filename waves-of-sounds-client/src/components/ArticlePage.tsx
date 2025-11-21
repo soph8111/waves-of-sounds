@@ -7,18 +7,18 @@ export default function  ArticlePage () {
   const article = location.state
 
   return (
-    <div className='container article_grid'>
-        <div>
+    <div className='container'>
             <h1>{article.title}</h1>
+        <div className="split_content">
             <p>{article.article}</p>
-        </div>
         <img 
         className='article_img' 
         src={article.image} 
         alt={article.title} 
         onError={(e) => {
-            e.currentTarget.src = "./public/img/article/placeholder.jpg";
+            e.currentTarget.src = "/img/articles/placeholder.jpg";
           }}/>
+          </div>
     </div>
   )
 }

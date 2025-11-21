@@ -22,7 +22,7 @@ const DepartmentSelector = ({ selectedDepartment, onSelectDepartment }: Props) =
         }
       >
         <option value="" disabled>
-          Choose a Department
+          Choose a department
         </option>
         {departments.map((department) => (
           <option key={department.id} value={department.id}>

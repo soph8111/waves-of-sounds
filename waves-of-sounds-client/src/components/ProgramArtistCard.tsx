@@ -52,7 +52,7 @@ interface Props {
           src={artist.image} 
           alt={artist.name} 
           onError={(e) => {
-            e.currentTarget.src = "./public/img/artists/placeholder.jpg";
+            e.currentTarget.src = "/img/artists/placeholder.jpg";
           }}
           />
           
@@ -65,7 +65,7 @@ interface Props {
           
           {/* Admin-only delete */}
           {isAdmin && (
-            <>
+            <div className="admin_artist_buttons">
               <button
                 type="button"
                 onClick={handleEdit}
@@ -82,7 +82,7 @@ interface Props {
               >
                 Delete from program
               </button>
-            </>
+            </div>
           )}
         </div>
     </Link>

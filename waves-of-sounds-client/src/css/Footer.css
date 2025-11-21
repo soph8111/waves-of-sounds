@@ -56,7 +56,8 @@ form {
   background-color: var(--background-color);
   display: flex;
   justify-content: right;
-  padding: 1em;
+  padding: 0.4em;
+  align-items: center;
 
   .link_adminpage,
   .button_to_adminpage {
@@ -79,15 +80,14 @@ form {
     padding: 0;
 
     input {
-    padding: 0.5em;
+    padding: 0.3em;
     border: 1.5px solid #d8d8d8;
-    font-size: 0.9em;
+    font-size: 0.7em;
   }
   
   ::placeholder {
     font-size: 0.7em;
   }
-
   }
 }
 

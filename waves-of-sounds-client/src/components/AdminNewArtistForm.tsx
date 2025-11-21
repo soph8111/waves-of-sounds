@@ -168,7 +168,7 @@ const NewArtistForm = ({
 
 
   return (
-    <div className="admin-form">
+    <div className="admin_form">
       <h2>{artistToEdit ? "Edit Artist" : "Add New Artist"}</h2>
 
       <form onSubmit={handleSubmit}>

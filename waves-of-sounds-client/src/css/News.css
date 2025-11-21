@@ -1,10 +1,8 @@
 /* Article Grid */
 #article_grid {
-    display: flex;
-    grid-gap: 3.5em;
-    /* grid-template-columns: repeat(auto-fit, 1fr); */
-    justify-content: center;
-    margin: 2em 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 270px);
+    gap: 4em;
 }
 
 /* Article card */
@@ -34,18 +32,13 @@
     .article_grid {
         display: grid;
         grid-template-columns: 28em auto;
-        gap: 3em;
+        gap: 5em;
     }
 
     .article_img {
         height: 30em;
         justify-self: right;
         object-fit: cover;
-    }
-
-    .article_card:hover {
-    width: 370px;
-    transition: all 0.4s ease;
     }
 
 }

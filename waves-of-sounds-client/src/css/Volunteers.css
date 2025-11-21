@@ -1,3 +1,8 @@
-.test {
-    color: #000;
+#department-selector {
+    width: 100%;
+    padding: 0.6em 1em;
+    border: 1.5px solid #d8d8d8;
+    font-family: var(--main-font-bold);
+    font-size: 0.85em;
+    color: var(--main-color-blue);
 }

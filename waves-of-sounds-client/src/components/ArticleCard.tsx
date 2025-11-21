@@ -12,7 +12,10 @@ interface Props {
 
         <Link to={`/news/${article.title}`} relative="path" state={article}>
         <div className="article_card" key={article.id} >
-            <img src={article.image} alt={article.title} />
+            <img src={article.image} alt={article.title} 
+            onError={(e) => {
+            e.currentTarget.src = "/img/articles/placeholder.jpg";
+          }}/>
             <div className="article_card_info">
                {article.title}
             </div>

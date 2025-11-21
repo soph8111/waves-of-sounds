@@ -6,15 +6,18 @@ export default function  ArtistPage () {
 
   return (
     <>
-    <div className='container artist_grid'>
-        <div className='artist_bio'>
+    <div className='container'>
             <h1>{artist.name}</h1>
-            <p className='intro_text'>{artist.bio}</p>
-        </div>
+        <div className='split_content artist_bio'>
+            <p>{artist.bio}</p>
         <img 
         className='artist_img' 
-        src={artist.image} alt={artist.name} 
+        src={artist.image} alt={artist.name}
+        onError={(e) => {
+            e.currentTarget.src = "/img/artists/placeholder.jpg";
+          }} 
         />
+        </div>
     </div>
     <iframe
     title={artist.name}

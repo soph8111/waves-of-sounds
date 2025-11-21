@@ -41,7 +41,7 @@ const VolunteerForm = () => {
 
   return (
     <div>
-      <h2>Sign Up as a Volunteer</h2>
+      <h2>Sign up as a volunteer</h2>
       <form onSubmit={handleSubmit}>
         {/* Name input */}
         <input
@@ -68,7 +68,7 @@ const VolunteerForm = () => {
         />
 
         {/* Submit button */}
-        <button type="submit">Sign Up</button>
+        <button className="styled_button" type="submit">Sign up</button>
       </form>
 
       {/* Success/Error message */}
