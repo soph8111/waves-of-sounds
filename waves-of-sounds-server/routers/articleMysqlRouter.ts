@@ -20,8 +20,6 @@ articleRouter.get("/", async (req, res) => {
   res.send(response);
 });
 
-// Create article ( POST )
-
 
 // Create article ( POST )
 const createArticle: RequestHandler = async (req, res) => {

@@ -7,6 +7,7 @@ import articleRouter from "../routers/articleMysqlRouter";
 import newsletterRouter from "../routers/newsletterMysqlRouter";
 import departmentRouter from "../routers/departmentMysqlRouter";
 import volunteerRouter from "../routers/volunteerMysqlRouter";
+import userRouter from "../routers/userMysqlRouter";
 
 const setupMysqlRouters = (app: express.Application) => {
     app.use("/artists", artistRouter);
@@ -17,6 +18,7 @@ const setupMysqlRouters = (app: express.Application) => {
     app.use("/newsletter", newsletterRouter);
     app.use("/departments", departmentRouter);
     app.use("/volunteers", volunteerRouter);
+    app.use("/user", userRouter);
 };
 
 export default setupMysqlRouters;

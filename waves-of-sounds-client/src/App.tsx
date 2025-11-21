@@ -13,9 +13,8 @@ import AdminRequire from "./components/AdminRequire"
 import PageNotFound from "./components/404"
 import { ChakraProvider } from '@chakra-ui/react'
 
-
 function App() {
-
+  
   return (
     <ChakraProvider>
       <NavBar />
