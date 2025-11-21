@@ -10,6 +10,7 @@ import ArticlePage from "./components/ArticlePage"
 import ArtistPage from "./components/ArtistPage"
 import AdminPage from "./components/AdminPage"
 import AdminRequire from "./components/AdminRequire"
+import PageNotFound from "./components/404"
 import { ChakraProvider } from '@chakra-ui/react'
 
 
@@ -27,10 +28,11 @@ function App() {
         <Route path="/artist/:slug" element={<ArtistPage />} />
         <Route path="/news/:slug" element={<ArticlePage />} />
         
-        
         <Route element={<AdminRequire />}>
-            <Route path="/admin" element={<AdminPage />} />
-          </Route>
+          <Route path="/admin" element={<AdminPage />} />
+        </Route>
+
+        <Route path="*" element={<PageNotFound />}></Route>
 
       </Routes>
       <Footer />
