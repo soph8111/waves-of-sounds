@@ -3,14 +3,14 @@
 
 import { useState } from "react";
 import apiClient from "../services/api-client";
-import { Article } from "../hooks/useArticle";
+// import { Article } from "../hooks/useArticle";
 
-interface Props {// parent giver id'er der er optaget
-  onSaved?: (saved: Article) => void;
-  // onCancel?: () => void;
-}
+// interface Props {// parent giver id'er der er optaget
+//   onSaved?: (saved: Article) => void;
+//   // onCancel?: () => void;
+// }
 
-const NewArticleForm = ( {onSaved} : Props) => {
+const NewArticleForm = () => {
   // States for form fields
   const [title, setTitle] = useState("");
   const [article, setArticle] = useState("");
@@ -26,10 +26,10 @@ const NewArticleForm = ( {onSaved} : Props) => {
 
     try {
 
-            const payload = { title: title.trim(), article: article.trim(), image: image.trim() || null, date: date || null };
+      // const payload = { title: title.trim(), article: article.trim(), image: image.trim() || null, date: date || null };
 
       // Antager apiClient er en axios-instans — axios returnerer { data }
-      const res = await apiClient.post<Article>("/articles", payload);
+      // const res = await apiClient.post<Article>("/articles", payload);
 
       // Sending POST request with form data
       await apiClient.post("/articles", {
@@ -46,7 +46,7 @@ const NewArticleForm = ( {onSaved} : Props) => {
       setImage("");
       setDate("");
 
-      onSaved?.(res.data);
+      // onSaved?.(res.data);
     } 
     
     catch (error) {
