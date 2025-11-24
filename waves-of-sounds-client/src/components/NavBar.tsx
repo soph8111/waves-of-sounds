@@ -24,7 +24,7 @@ export default function Navbar() {
       icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
       />
       <Link to="/" className="logo">
-        <img src="../src/assets/images/logo.png" alt="Logo" />
+        <img src="/img/other/logo.png" alt="Logo" />
       </Link>
       <ul className={isOpen ? 'is_open' : ''}>
         <CustomLink to="./program">program</CustomLink>
@@ -121,7 +121,7 @@ function CustomLink({ to, children, ...props }: { to: string, children: string }
 //           </Flex>
 //           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
 //             <a href="../src/App.tsx">logo
-//               {/* <img src="../src/assets/images/logo.png" alt="logo"/> */}
+//               {/* <img src="/img/other/logo.png" alt="logo"/> */}
 //             </a>
 //             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
 //               <DesktopNav />
