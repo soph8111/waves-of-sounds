@@ -24,7 +24,6 @@ const NewArtistForm = ({
   schedules,
   occupiedScheduleIds,
   onSaved,
-  // onCancel,
 }: Props) => {
 
   // ---------------- FORM STATE ----------------
@@ -68,7 +67,7 @@ const NewArtistForm = ({
   }, [artistToEdit]);
 
 
-  // ---------------- HANDLE SUBMIT ----------------
+  // ---------------- HANDLE SUBMIT WITH ROLLBACK ----------------
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");
@@ -96,6 +95,18 @@ const NewArtistForm = ({
 
     setLoading(true);
 
+    // --- TAKE SNAPSHOT FOR ROLLBACK ---
+    const snapshot = {
+      name,
+      bio,
+      spotify,
+      image,
+      selectedStage,
+      selectedSchedule,
+      selectedGenres: [...selectedGenres],
+      message,
+    };
+
     const payload = {
       name,
       bio,
@@ -120,7 +131,7 @@ const NewArtistForm = ({
         saved = res.data;
         setMessage("Artist created!");
 
-        // Reset after create
+        // Reset after create (only after success)
         setName("");
         setBio("");
         setSpotify("");
@@ -130,9 +141,24 @@ const NewArtistForm = ({
         setSelectedGenres([]);
       }
 
-      onSaved?.(saved);
+      // call parent callback (wrap in try/catch in case parent throws)
+      try {
+        onSaved?.(saved);
+      } catch (cbErr) {
+        // If parent's onSaved misbehaves, rollback to snapshot and show error
+        console.error("onSaved callback threw:", cbErr);
+        // Rollback UI state
+        setName(snapshot.name);
+        setBio(snapshot.bio);
+        setSpotify(snapshot.spotify);
+        setImage(snapshot.image);
+        setSelectedStage(snapshot.selectedStage);
+        setSelectedSchedule(snapshot.selectedSchedule);
+        setSelectedGenres(snapshot.selectedGenres);
+        setMessage("Saved but parent update failed; rolled back UI.");
+      }
 
-        } catch (err) {
+    } catch (err) {
       console.error("Error saving:", err);
 
       // Gør TypeScript glad ved at fortælle hvilken type Axios fejl har
@@ -156,6 +182,14 @@ const NewArtistForm = ({
         setMessage("Something went wrong — check console.");
       }
 
+      // --- ROLLBACK TO SNAPSHOT ---
+      setName(snapshot.name);
+      setBio(snapshot.bio);
+      setSpotify(snapshot.spotify);
+      setImage(snapshot.image);
+      setSelectedStage(snapshot.selectedStage);
+      setSelectedSchedule(snapshot.selectedSchedule);
+      setSelectedGenres(snapshot.selectedGenres);
     } finally {
       setLoading(false);
     }
@@ -224,18 +258,6 @@ const NewArtistForm = ({
           <button type="submit" disabled={loading} className="styled_button" >
             {buttonLabel}
           </button>
-
-          {/* {onCancel && (
-            <button
-              className="styled_button"
-              type="button"
-              onClick={onCancel}
-              disabled={loading}
-              style={{ marginLeft: 8 }}
-            >
-              Cancel
-            </button>
-          )} */}
         </div>
       </form>
 
@@ -244,4 +266,4 @@ const NewArtistForm = ({
   );
 };
 
-export default NewArtistForm
+export default NewArtistForm;
