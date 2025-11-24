@@ -138,6 +138,12 @@ hr {
 
     .artist_card {
         width: 370px;
+        transition: all 0.4s ease;
+    }
+
+    .artist_card:hover {
+        transition: all 0.4s ease;
+        transform: scale(1.04);
     }
 
     .artist_grid {

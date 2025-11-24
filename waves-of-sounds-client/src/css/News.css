@@ -35,6 +35,10 @@
         gap: 5em;
     }
 
+    .article_card:hover {
+    transform: scale(1.04);
+}
+
     .article_img {
         height: 30em;
         justify-self: right;
