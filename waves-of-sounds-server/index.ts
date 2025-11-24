@@ -13,6 +13,13 @@ app.get("/", (req, res) => {
     res.send("Root endpoint.");
 });
 
-app.listen(4001, () => {
-    console.log("Server is running on port 4001");
+// ------ LOCAL ---------
+// app.listen(4001, () => {
+//     console.log("Server is running on port 4001");
+// });
+
+// ------ RENDER ----------
+const PORT = process.env.PORT || 4001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
