@@ -15,6 +15,7 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.7",
+    "@types/strip-json-comments": "^0.0.30",
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
