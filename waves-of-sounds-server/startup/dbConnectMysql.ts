@@ -22,8 +22,8 @@ const dbConnectMysql = async () => {
     try {
       const result = await AppDataSource.query("SELECT 1 AS ok");
       console.log("DB test query result:", result);
-    } catch (qErr) {
-      console.log("DB test query failed:", qErr);
+    } catch (error_) {
+      console.log("DB test query failed:", error_);
     }
   } catch (err) {
     console.log("Error connecting to Mysql", err);
