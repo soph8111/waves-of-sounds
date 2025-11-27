@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Box, Button, Input, Alert, AlertIcon } from "@chakra-ui/react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import api from "../api";
 
 type LoginResponse = {
   id: number;
@@ -41,9 +42,14 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const res = await axios.post<LoginResponse>("/user/login", {
+      // const res = await axios.post<LoginResponse>("/user/login", {
+      //   email: email.trim().toLowerCase(),
+      //   password: password,
+      // });
+
+      const res = await api.post<LoginResponse>("/user/login", {
         email: email.trim().toLowerCase(),
-        password: password,
+        password,
       });
 
       if (res.data.isAdmin === true) {
