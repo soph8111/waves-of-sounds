@@ -52,7 +52,7 @@ export default function AdminLogin() {
     // use api (which has baseURL from REACT_APP_API_URL)
     const res = await api.post<LoginResponse>("/user/login", {
       email: email.trim().toLowerCase(),
-      password: password,
+      password,
     });
 
       if (res.data.isAdmin === true) {
