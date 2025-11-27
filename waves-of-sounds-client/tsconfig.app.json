@@ -75,6 +75,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "../waves-of-sounds-server/api.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
