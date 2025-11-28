@@ -56,8 +56,11 @@ import init from "./startup/init";
 const app = express();
 
 // PRODUKTIONSKLAR CORS
-const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"]
-  .filter(Boolean) as string[]; // <--- fjern undefined og cast til string[]
+const allowedOrigins = [
+  process.env.FRONTEND_URL, 
+  "http://localhost:5173",
+  "http://localhost:8081"
+].filter(Boolean) as string[];
 
 app.use(cors({
   origin: allowedOrigins,
