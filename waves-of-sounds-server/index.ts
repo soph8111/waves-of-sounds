@@ -52,6 +52,7 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import init from "./startup/init";
+import { setupSwagger } from "./swagger";
 
 const app = express();
 
@@ -69,6 +70,7 @@ app.use(cors({
 
 
 app.use(express.json());
+setupSwagger(app);
 
 init(app);
 
