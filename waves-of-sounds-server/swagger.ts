@@ -5,7 +5,10 @@ import path from "path";
 import type { Express } from "express";
 
 const projectRoot = process.cwd(); // rodmappen hvor du kører npm run
-const routesPattern = path.join(projectRoot, "routers", "*.ts");
+const routesPattern =
+  process.env.NODE_ENV === "production"
+    ? path.join(projectRoot, "dist", "routers", "*.js")
+    : path.join(projectRoot, "routers", "*.ts");
 
 // indsæt dette i src/swagger.ts - erstat options.definition eller hele options-blokken
 const options = {
@@ -16,7 +19,9 @@ const options = {
       version: "1.0.0",
       description: "API-dokumentation for Waves of Sounds (dev)",
     },
-    servers: [{ url: "http://localhost:4001", description: "Local dev" }],
+    servers: [
+      { url: "https://waves-of-sounds-server.onrender.com", description: "Render Prod" },
+      { url: "http://localhost:4001", description: "Local dev" }],
     components: {
       securitySchemes: {
         cookieAuth: { type: "apiKey", in: "cookie", name: "token" },
