@@ -5,6 +5,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 
 import * as Sentry from "@sentry/react"
+import ScrollToTop from './components/ScrollToTop'
 
 // --- SENTRY INIT ---
 Sentry.init({
@@ -18,6 +19,7 @@ Sentry.init({
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <App />
     </BrowserRouter>
   </StrictMode>,
