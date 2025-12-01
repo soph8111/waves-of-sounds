@@ -10,6 +10,33 @@ interface Response {
 const volunteerRouter = Router();
 const volunteerRepository = AppDataSource.getRepository(Volunteer);
 
+/**
+ * @openapi
+ * /volunteers/{id}/departments:
+ *   post:
+ *     summary: Attach volunteer to a department
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               departmentId:
+ *                 type: integer
+ *     responses:
+ *       '201':
+ *         description: Attached
+ *       '400':
+ *         description: Invalid input
+ */
+
 // POST route to add a new volunteer
 volunteerRouter.post("/", async (req, res) => {
   const { name, email, departmentId } = req.body;
@@ -34,6 +61,56 @@ volunteerRouter.post("/", async (req, res) => {
     res.status(500).json({ message: "Failed to save volunteer", error });
   }
 });
+
+/**
+ * @openapi
+ * /volunteers:
+ *   get:
+ *     summary: Get all volunteers
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Volunteer'
+ *   post:
+ *     summary: Create a volunteer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/VolunteerInput'
+ *     responses:
+ *       '201':
+ *         description: Created
+ */
+
+/**
+ * @openapi
+ * /volunteers/{id}:
+ *   get:
+ *     summary: Get volunteer by id
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: Volunteer object
+ *       '404':
+ *         description: Not found
+ */
 
 // GET route to retrieve all volunteers
 volunteerRouter.get("/", async (req, res) => {

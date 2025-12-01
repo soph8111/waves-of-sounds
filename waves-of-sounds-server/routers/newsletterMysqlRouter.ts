@@ -10,6 +10,37 @@ interface Response {
 const newsletterRouter = Router();
 const newsletterRepository = AppDataSource.getRepository(Newsletter);
 
+/**
+ * @openapi
+ * /newsletter:
+ *   post:
+ *     summary: Subscribe to newsletter
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/NewsletterInput'
+ *           example:
+ *             name: "Sophie"
+ *             email: "sophie@example.com"
+ *     responses:
+ *       '201':
+ *         description: Subscribed
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Newsletter'
+ *       '400':
+ *         description: Validation error (missing email)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       '500':
+ *         description: Server error
+ */
+
 // POST route to add a new newsletter subscription
 newsletterRouter.post("/", async (req, res) => {
 // name and email from req.body. When the user submits the form
@@ -34,6 +65,27 @@ newsletterRouter.post("/", async (req, res) => {
     res.status(500).json({ message: "Failed to save subscription", error });
   }
 });
+
+/**
+ * @openapi
+ *   get:
+ *     summary: Get all newsletter subscriptions
+ *     responses:
+ *       '200':
+ *         description: List of subscriptions
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                   example: 10
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Newsletter'
+ */
 
 // Get all newsletters
 newsletterRouter.get("/", async (req, res) => {

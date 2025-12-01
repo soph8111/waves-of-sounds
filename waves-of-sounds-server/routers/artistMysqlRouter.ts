@@ -24,6 +24,44 @@ interface Response {
 const artistRouter = Router();
 const artistRepository = AppDataSource.getRepository(Artist);
 
+/**
+ * @openapi
+ * /artists:
+ *   get:
+ *     summary: Get artists (filterable)
+ *     description: Retrieve a list of artists. Supports filtering by genres (comma-separated ids), stage and schedule.
+ *     parameters:
+ *       - in: query
+ *         name: genres
+ *         schema:
+ *           type: string
+ *         description: Comma-separated genre ids, e.g. "1,2"
+ *       - in: query
+ *         name: stage
+ *         schema:
+ *           type: integer
+ *         description: Stage id
+ *       - in: query
+ *         name: schedule
+ *         schema:
+ *           type: integer
+ *         description: Schedule id
+ *     responses:
+ *       '200':
+ *         description: List of artists
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Artist'
+ */
+
 // Get all artists (GET)
 const getArtists: RequestHandler = async (req, res) => {
   try {
@@ -79,6 +117,38 @@ const getArtists: RequestHandler = async (req, res) => {
 
 artistRouter.get("/", getArtists);
 
+/**
+ * @openapi
+ * /artists:
+ *   post:
+ *     summary: Create a new artist
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ArtistInput'
+ *           example:
+ *             name: "New Band"
+ *             bio: "Short bio"
+ *             spotify: "https://open.spotify.com/..."
+ *             image: "/img/artists/example.jpg"
+ *             stageId: 2
+ *             scheduleId: 7
+ *             genreIds: [1,2]
+ *     responses:
+ *       '201':
+ *         description: Artist created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Artist'
+ *       '400':
+ *         description: Validation error (missing required fields)
+ *       '500':
+ *         description: Server error
+ */
+
 const createArtist: RequestHandler = async (req, res) => {
   try {
     const { name, bio, spotify, image, stageId, scheduleId, genreIds } = req.body;
@@ -117,6 +187,26 @@ const createArtist: RequestHandler = async (req, res) => {
 };
 
 artistRouter.post("/", createArtist);
+
+/**
+ * @openapi
+ * /artists/{id}:
+ *   delete:
+ *     summary: Delete an artist
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '204':
+ *         description: No content (artist deleted)
+ *       '400':
+ *         description: Invalid id
+ *       '500':
+ *         description: Server error
+ */
 
 // Delete artist (DELETE)
 const deleteArtist: RequestHandler = async (req, res) => {
@@ -162,6 +252,40 @@ const deleteArtist: RequestHandler = async (req, res) => {
 };
 
 artistRouter.delete("/:id", deleteArtist);
+
+/**
+ * @openapi
+ * /artists/{id}:
+ *   put:
+ *     summary: Update an artist
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ArtistInput'
+ *     responses:
+ *       '200':
+ *         description: Updated artist
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Artist'
+ *       '400':
+ *         description: Invalid input
+ *       '404':
+ *         description: Artist not found
+ *       '409':
+ *         description: Schedule conflict
+ *       '500':
+ *         description: Server error
+ */
 
 const updateArtist: RequestHandler = async (req, res) => {
   const id = Number(req.params.id);

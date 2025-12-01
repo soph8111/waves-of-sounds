@@ -1,4 +1,3 @@
-// src/routers/userRouter.ts
 import { Router, Request, Response } from "express";
 import { AppDataSource } from "../startup/data-source";
 import { User } from "../entities/User";
@@ -7,26 +6,59 @@ import bcrypt from "bcryptjs";
 const userRouter = Router();
 const userRepository = AppDataSource.getRepository(User);
 
+/**
+ * @openapi
+ * /user/login:
+ *   post:
+ *     summary: User login
+ *     description: Authenticates a user using email and password.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: "user@example.com"
+ *               password:
+ *                 type: string
+ *                 example: "mypassword123"
+ *     responses:
+ *       '200':
+ *         description: Login successful
+ *       '400':
+ *         description: Missing email or password
+ *       '401':
+ *         description: Invalid email or password
+ *       '500':
+ *         description: Server error
+ */
+
 // SECURE LOGIN — POST /user/login
 userRouter.post("/login", async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      res.status(400).json({ error: "Email og password påkrævet." });
+      res.status(400).json({ error: "Missing email or password." });
       return;
     }
 
     const user = await userRepository.findOne({ where: { email } });
 
     if (!user) {
-      res.status(401).json({ error: "Forkert email eller password." });
+      res.status(401).json({ error: "Invalid email or password." });
       return;
     }
 
     const passwordCorrect = await bcrypt.compare(password, user.password_hash);
     if (!passwordCorrect) {
-      res.status(401).json({ error: "Forkert email eller password." });
+      res.status(401).json({ error: "Invalid email or password." });
       return;
     }
 
@@ -41,6 +73,29 @@ userRouter.post("/login", async (req: Request, res: Response): Promise<void> => 
     res.status(500).json({ error: "Server error" });
   }
 });
+
+/**
+ * @openapi
+ * /user:
+ *   get:
+ *     summary: Get all users
+ *     description: Returns a list of all registered users.
+ *     responses:
+ *       '200':
+ *         description: List of users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                   example: 3
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/User'
+ */
 
 // GET /user (må gerne blive hvis du bruger den)
 userRouter.get("/", async (req, res) => {

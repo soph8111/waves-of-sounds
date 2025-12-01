@@ -10,6 +10,29 @@ interface Response {
 const stageRouter = Router();
 const stageRepository = AppDataSource.getRepository(Stage);
 
+/**
+ * @openapi
+ * /stages:
+ *   get:
+ *     summary: Get all stages
+ *     description: Returns all stage entries.
+ *     responses:
+ *       '200':
+ *         description: List of stages
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                   example: 3
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Stage'
+ */
+
 // Get all stages
 stageRouter.get("/", async (req, res) => {
   const stages = await stageRepository.find();
