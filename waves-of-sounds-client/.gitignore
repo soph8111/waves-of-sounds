@@ -25,3 +25,14 @@ dist-ssr
 
 # TypeScript build info
 *.tsbuildinfo
+
+# dependencies
+node_modules/
+
+# build outputs
+dist/
+build/
+
+# ts/vite cache
+*.tsbuildinfo
+.vite
