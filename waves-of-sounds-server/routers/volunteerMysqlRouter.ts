@@ -93,6 +93,23 @@ volunteerRouter.post("/", async (req, res) => {
  *       '201':
  *         description: Created
  */
+// GET route to retrieve all volunteers
+volunteerRouter.get("/", async (req, res) => {
+  try {
+    const volunteers = await volunteerRepository.find({
+      relations: ["departments"], // Include related departments
+    });
+
+    const response: Response = {
+      count: volunteers.length,
+      results: volunteers,
+    };
+
+    res.send(response);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch volunteers", error });
+  }
+});
 
 /**
  * @openapi
@@ -111,22 +128,30 @@ volunteerRouter.post("/", async (req, res) => {
  *       '404':
  *         description: Not found
  */
+// GET /volunteers/:id - get single volunteer
+volunteerRouter.get("/:id", async (req, res) => {
+  const id = Number(req.params.id);
 
-// GET route to retrieve all volunteers
-volunteerRouter.get("/", async (req, res) => {
+  if (!Number.isInteger(id)) {
+    res.status(400).json({ error: "Invalid volunteer id" });
+    return;
+  }
+
   try {
-    const volunteers = await volunteerRepository.find({
-      relations: ["departments"], // Include related departments
+    const volunteer = await volunteerRepository.findOne({
+      where: { id },
+      relations: ["departments"], // Include department relation
     });
 
-    const response: Response = {
-      count: volunteers.length,
-      results: volunteers,
-    };
+    if (!volunteer) {
+      res.status(404).json({ error: "Volunteer not found" });
+      return;
+    }
 
-    res.send(response);
+    res.json(volunteer);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch volunteers", error });
+    console.error("Failed to fetch volunteer:", error);
+    res.status(500).json({ error: "Failed to fetch volunteer" });
   }
 });
 

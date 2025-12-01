@@ -74,29 +74,6 @@ userRouter.post("/login", async (req: Request, res: Response): Promise<void> => 
   }
 });
 
-/**
- * @openapi
- * /user:
- *   get:
- *     summary: Get all users
- *     description: Returns a list of all registered users.
- *     responses:
- *       '200':
- *         description: List of users
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 count:
- *                   type: integer
- *                   example: 3
- *                 results:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/User'
- */
-
 // GET /user (må gerne blive hvis du bruger den)
 userRouter.get("/", async (req, res) => {
   const users = await userRepository.find();
