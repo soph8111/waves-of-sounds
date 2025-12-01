@@ -49,7 +49,7 @@ interface Props {
       >
         <div className="artist_card" key={artist.id}>
           <img 
-          src={artist.image} 
+          src={artist.image || "/img/artists/placeholder.jpg"}  
           alt={artist.name} 
           onError={(e) => {
             e.currentTarget.src = "/img/artists/placeholder.jpg";

@@ -13,7 +13,7 @@ export default function  ArticlePage () {
             <p>{article.article}</p>
         <img 
         className='article_img' 
-        src={article.image} 
+        src={article.image || "/img/articles/placeholder.jpg"}
         alt={article.title} 
         onError={(e) => {
             e.currentTarget.src = "/img/articles/placeholder.jpg";

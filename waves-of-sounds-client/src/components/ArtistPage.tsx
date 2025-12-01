@@ -12,7 +12,8 @@ export default function  ArtistPage () {
             <p>{artist.bio}</p>
         <img 
         className='artist_img' 
-        src={artist.image} alt={artist.name}
+        src={artist.image || "/img/artists/placeholder.jpg"} 
+        alt={artist.name}
         onError={(e) => {
             e.currentTarget.src = "/img/artists/placeholder.jpg";
           }} 
