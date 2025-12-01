@@ -36,3 +36,9 @@ build/
 # ts/vite cache
 *.tsbuildinfo
 .vite
+
+# ts build outputs
+.tsbuild
+.tsbuild/
+.tsbuild/*
+.tsbuildinfo

@@ -44,15 +44,20 @@ const express_1 = __importDefault(require("express"));
 require("dotenv/config");
 const cors_1 = __importDefault(require("cors"));
 const init_1 = __importDefault(require("./startup/init"));
+const swagger_1 = require("./swagger");
 const app = (0, express_1.default)();
 // PRODUKTIONSKLAR CORS
-const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"]
-    .filter(Boolean); // <--- fjern undefined og cast til string[]
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    "http://localhost:5173",
+    "http://localhost:8081"
+].filter(Boolean);
 app.use((0, cors_1.default)({
     origin: allowedOrigins,
     credentials: true
 }));
 app.use(express_1.default.json());
+(0, swagger_1.setupSwagger)(app);
 (0, init_1.default)(app);
 app.get("/", (req, res) => {
     res.send("Root endpoint.");
