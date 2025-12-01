@@ -1,6 +1,6 @@
-import useArticle from "../hooks/useArticle";
-import ArticleCard from "./ArticleCard";
-import { getLatest } from "../utils/articles";
+import useArticle from "../../hooks/useArticle";
+import ArticleCard from "../news/ArticleCard";
+import { getLatest } from "../../utils/articles";
 
 const LatestNews = () => {
   const { data: articles = [] } = useArticle();

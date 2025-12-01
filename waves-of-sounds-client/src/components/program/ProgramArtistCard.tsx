@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 // import data from "../services/program.json";
-import { Artist } from "../hooks/useArtist";
-import apiClient from "../services/api-client";
+import { Artist } from "../../hooks/useArtist";
+import apiClient from "../../services/api-client";
 
-import useStage from "../hooks/useStage";
+import useStage from "../../hooks/useStage";
 
 
 interface Props {

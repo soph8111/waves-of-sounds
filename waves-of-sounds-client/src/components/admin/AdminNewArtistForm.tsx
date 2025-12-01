@@ -1,15 +1,15 @@
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
+import apiClient from "../../services/api-client";
 
-import { Artist } from "../hooks/useArtist";
+import { Artist } from "../../hooks/useArtist";
 
 import AdminStageSelector from "./AdminNewArtistSelectorStage";
 import AdminScheduleSelector from "./AdminNewArtistSelectorSchedule";
 import AdminGenreSelector from "./AdminNewArtistSelectorGenre";
 
-import { Stage } from "../hooks/useStage";
-import { Schedule } from "../hooks/useSchedule";
+import { Stage } from "../../hooks/useStage";
+import { Schedule } from "../../hooks/useSchedule";
 
 interface Props {
   artistToEdit?: Artist | null;
@@ -144,9 +144,9 @@ const NewArtistForm = ({
       // call parent callback (wrap in try/catch in case parent throws)
       try {
         onSaved?.(saved);
-      } catch (cbErr) {
+      } catch (error_) {
         // If parent's onSaved misbehaves, rollback to snapshot and show error
-        console.error("onSaved callback threw:", cbErr);
+        console.error("onSaved callback threw:", error_);
         // Rollback UI state
         setName(snapshot.name);
         setBio(snapshot.bio);

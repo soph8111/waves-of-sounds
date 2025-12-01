@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Box, Button, Input, Alert, AlertIcon } from "@chakra-ui/react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import api from "../api";
+import api from "../../api";
 
 type LoginResponse = {
   id: number;

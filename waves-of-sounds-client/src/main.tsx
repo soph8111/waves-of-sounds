@@ -5,7 +5,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 
 import * as Sentry from "@sentry/react"
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/common/ScrollToTop'
 
 // --- SENTRY INIT ---
 Sentry.init({

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import apiClient from "../services/api-client";
+import apiClient from "../../services/api-client";
 
 const Newsletter = () => {
   // Setting states

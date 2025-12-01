@@ -2,15 +2,15 @@
 // import data from '../services/program.json';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
-import useGenre, { Genre } from "../hooks/useGenre";
+import useStage, { Stage } from '../../hooks/useStage';
 
 interface Props {
-  selectedGenre: Genre | null;
-  onSelectGenre: (genre: Genre | null ) => void;
+  selectedStage: Stage | null;
+  onSelectStage: (stage: Stage | null ) => void;
 }
 
-const GenreSelector = ({ onSelectGenre, selectedGenre }: Props) => {
-  const { data: genres} = useGenre();
+const StageSelector = ({ onSelectStage, selectedStage }: Props) => {
+  const { data: stages} = useStage();
 
   return (
   <Menu>
@@ -19,24 +19,24 @@ const GenreSelector = ({ onSelectGenre, selectedGenre }: Props) => {
     rightIcon={<ChevronDownIcon />}
     className="selector_name" 
     aria-label='selector_name'>
-    {selectedGenre ? selectedGenre.name : "Genre"}
+    {selectedStage ? selectedStage.name : "Stage"}
     </MenuButton>
     <MenuList>
-    <MenuItem 
-          onClick={() => onSelectGenre(null)} // Choose "all" by returning null
+      <MenuItem 
+          onClick={() => onSelectStage(null)} // Choose "all" by returning null
           className="selector_list" 
           aria-label="selector_list" 
         >
-          All Genres
+          All Stages
           </MenuItem>
-      {genres.map((genre) => (
+      {stages.map((stage) => (
         <MenuItem 
-        onClick={() => onSelectGenre(genre)}
-        key={genre.id}
+        onClick={() => onSelectStage(stage)}
+        key={stage.id}
         className="selector_list" 
         aria-label='selector_list' 
         >
-          {genre.name}
+          {stage.name}
         </MenuItem>
       ))}
     </MenuList>
@@ -44,4 +44,5 @@ const GenreSelector = ({ onSelectGenre, selectedGenre }: Props) => {
   );
 };
   
-export default GenreSelector
+export default StageSelector
+

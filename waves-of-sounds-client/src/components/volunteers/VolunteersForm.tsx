@@ -1,6 +1,6 @@
 import { useState } from "react";
-import apiClient from "../services/api-client";
-import { Department } from "../hooks/useDepartment";
+import apiClient from "../../services/api-client";
+import { Department } from "../../hooks/useDepartment";
 import DepartmentSelector from "./VolunteersSelectorDepartment";
 
 const VolunteerForm = () => {

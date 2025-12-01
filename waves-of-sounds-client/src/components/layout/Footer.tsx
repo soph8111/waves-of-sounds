@@ -1,5 +1,5 @@
-import AdminLogin from "./AdminLogin";
-import NewsletterForm from "./NewsletterForm";
+import AdminLogin from "../admin/AdminLogin";
+import NewsletterForm from "../common/NewsletterForm"
 
 const Footer = () => {
     return (

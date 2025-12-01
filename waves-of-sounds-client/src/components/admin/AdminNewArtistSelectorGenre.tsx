@@ -1,4 +1,4 @@
-import useGenre from "../hooks/useGenre";
+import useGenre from "../../hooks/useGenre";
 
 interface Props {
   selectedGenres: number[];

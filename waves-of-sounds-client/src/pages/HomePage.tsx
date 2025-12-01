@@ -1,5 +1,5 @@
-import LatestNews from "./HomeLatestNews";
-import WelcomeSection from "./HomeWelcome";
+import LatestNews from "../components/home/HomeLatestNews";
+import WelcomeSection from "../components/home/HomeWelcome";
 
 const Home = () => {
     return (

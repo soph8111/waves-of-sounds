@@ -1,5 +1,5 @@
 // AdminPage.tsx
-import NewArticleForm from "./AdminNewsBlock";
+import NewArticleForm from "../components/admin/AdminNewsForm";
 
 export default function AdminPage() {
 

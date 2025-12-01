@@ -1,4 +1,4 @@
-import VolunteersForm from "./VolunteersForm";
+import VolunteersForm from "../components/volunteers/VolunteersForm";
 
 const Volunteers = () => {
     return (

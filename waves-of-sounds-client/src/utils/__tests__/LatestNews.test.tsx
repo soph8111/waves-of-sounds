@@ -13,7 +13,7 @@ jest.mock("../../services/api-client", () => {
 import * as useArticleModule from "../../hooks/useArticle";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import LatestNews from "../../components/HomeLatestNews"; // ret hvis din komponent hedder noget andet
+import LatestNews from "../../components/home/HomeLatestNews"; // ret hvis din komponent hedder noget andet
 import { Article } from "../../utils/articles";
 
 // NOTE: ingen mock for ArticleCard her — vi bruger den rigtige komponent.

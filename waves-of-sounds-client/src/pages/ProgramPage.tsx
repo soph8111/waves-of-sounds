@@ -9,11 +9,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import ProgramGrid from "./ProgramGrid";
-import StageSelector from "./ProgramSelectorStage";
-import GenreSelector from "./ProgramSelectorGenre";
-import DateSelector from "./ProgramSelectorDate";
-import AdminNewArtistForm from "./AdminNewArtistForm";
+import ProgramGrid from "../components/program/ProgramGrid";
+import StageSelector from "../components/program/ProgramSelectorStage";
+import GenreSelector from "../components/program/ProgramSelectorGenre";
+import DateSelector from "../components/program/ProgramSelectorDate";
+import AdminNewArtistForm from "../components/admin/AdminNewArtistForm";
 
 import useArtist, { Artist } from "../hooks/useArtist";
 import { Stage } from "../hooks/useStage";

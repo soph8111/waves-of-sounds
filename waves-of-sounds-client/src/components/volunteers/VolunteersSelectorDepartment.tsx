@@ -1,5 +1,4 @@
-// import React from "react";
-import useDepartments, { Department } from "../hooks/useDepartment";
+import useDepartments, { Department } from "../../hooks/useDepartment";
 
 interface Props {
   selectedDepartment: Department | null;

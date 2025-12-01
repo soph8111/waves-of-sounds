@@ -1,4 +1,4 @@
-import useStage, {Stage} from "../hooks/useStage";
+import useStage, {Stage} from "../../hooks/useStage";
 
 interface Props {
   selectedStage: Stage | null;

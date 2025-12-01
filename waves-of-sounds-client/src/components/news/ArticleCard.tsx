@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Article } from "../hooks/useArticle";
+import { Article } from "../../hooks/useArticle";
 
 interface Props {
     article: Article;
