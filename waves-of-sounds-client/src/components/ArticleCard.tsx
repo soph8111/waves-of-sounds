@@ -14,6 +14,7 @@ interface Props {
         <div className="article_card" key={article.id} >
             <img 
             src={article.image || "/img/articles/placeholder.jpg"}
+            alt={article.title}
             onError={(e) => {
             e.currentTarget.src = "/img/articles/placeholder.jpg";
           }}/>
@@ -26,6 +27,6 @@ interface Props {
     );
   }
 
-  export default ArticleCard 
+  export default ArticleCard;
 
 
