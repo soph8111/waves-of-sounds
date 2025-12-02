@@ -1,8 +1,13 @@
 import { useLocation } from 'react-router-dom'
 
+const FALLBACK_SPOTIFY = "https://open.spotify.com/embed/playlist/7dWdVrXD7fhFfobwqfjkuE?utm_source=generator";
+
 export default function  ArtistPage () {
   const location = useLocation()
   const artist = location.state
+
+const spotifyUrl = artist?.spotify?.includes("open.spotify.com") ? artist.spotify : FALLBACK_SPOTIFY;
+
 
   return (
     <>
@@ -21,9 +26,9 @@ export default function  ArtistPage () {
         </div>
     </div>
     <iframe
-    title={artist.name}
+    title={artist?.name ?? "Music on waves of sound"}
     className="artist_spotify" 
-    src={artist.spotify} 
+    src={spotifyUrl} 
     frameBorder="0" 
     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
     loading="lazy" />

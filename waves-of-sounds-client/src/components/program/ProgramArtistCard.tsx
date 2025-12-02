@@ -43,7 +43,7 @@ interface Props {
 
   return (
     <Link
-      to={`/artist/${artist.id}`}
+      to={`/artist/${artist.name}`}
       relative="path"
       state={artist}
       >
