@@ -4,6 +4,7 @@ import { AppDataSource } from "../startup/data-source";
 import { Genre } from "../entities/Genre";
 import { Schedule } from "../entities/Schedule";
 import { In } from "typeorm"; // TypeORM’s SQL "WHERE IN" search
+import { Stage } from "../entities/Stage";
 
 interface ModifiedArtist {
   id: number;
@@ -151,40 +152,66 @@ artistRouter.get("/", getArtists);
 
 const createArtist: RequestHandler = async (req, res) => {
   try {
-    const { name, bio, spotify, image, stageId, scheduleId, genreIds } = req.body;
+    console.log("POST /artists payload:", req.body);
 
-    if (!name || !stageId || !scheduleId) {
-      res.status(400).json({ message: "name, stageId and scheduleId are required" });
-      return;
+    const name = req.body.name;
+    const bio = req.body.bio ?? null;
+    const spotify = req.body.spotify ?? null;
+    const image = req.body.image ?? null;
+    const stageId = Number(req.body.stageId ?? req.body.stage);
+    const scheduleId = Number(req.body.scheduleId ?? req.body.schedule);
+    const genreIds = Array.isArray(req.body.genreIds) ? req.body.genreIds.map(Number) : [];
+
+    if (!name || !Number.isInteger(stageId) || !Number.isInteger(scheduleId)) {
+      return res.status(400).json({ message: "name, stageId and scheduleId are required (integers)" });
     }
 
     const artistRepo = AppDataSource.getRepository(Artist);
     const genreRepo = AppDataSource.getRepository(Genre);
+    const scheduleRepo = AppDataSource.getRepository(Schedule);
+    const stageRepo = AppDataSource.getRepository(Stage);
 
-    // Build the artist entity — brug partial for at undgå fuld entity-objektkrav
-    const newArtist = artistRepo.create({
+    // Valider relationer
+    const schedule = await scheduleRepo.findOneBy({ id: scheduleId });
+    if (!schedule) return res.status(400).json({ message: "Invalid scheduleId" });
+
+    const stage = await stageRepo.findOneBy({ id: stageId });
+    if (!stage) return res.status(400).json({ message: "Invalid stageId" });
+
+    // Optional: check schedule unique
+    const occupied = await artistRepo.findOne({ where: { scheduleId } as any });
+    if (occupied) return res.status(409).json({ error: "Schedule already assigned" });
+
+    // 1) Create artist WITHOUT genres first
+    const partial = artistRepo.create({
       name,
       bio,
       spotify,
       image,
-      stageId,     // hvis din entity har stageId kolonne
-      schedule: { id: scheduleId } as any, // alternativt: scheduleId felt afhængig af entity
+      stageId,
+      scheduleId,
+      stage,
+      schedule,
+      // do NOT include genres here
     } as Partial<Artist>);
 
-    // Hvis du har genreIds (array af tal), hent genre-objekter og tilknyt dem
+    const savedArtist = await artistRepo.save(partial);
+
+    // 2) If there are genres, hent dem og tilknyt—gem igen
     if (Array.isArray(genreIds) && genreIds.length > 0) {
-      const genres = await genreRepo.find({
-        where: { id: In(genreIds) } as any
-      });
-      (newArtist as any).genres = genres;
+      const numeric = genreIds.filter((n) => Number.isInteger(n));
+      const genres = numeric.length > 0 ? await genreRepo.find({ where: { id: In(numeric) } as any }) : [];
+      if (genres.length > 0) {
+        (savedArtist as any).genres = genres;
+        await artistRepo.save(savedArtist); // anden save: nu kender DB artist.id
+      }
     }
 
-    const saved = await artistRepo.save(newArtist);
-    // returner 201 ligesom createArticle
-    res.status(201).json(saved);
-  } catch (err) {
-    console.error("Failed to create artist:", err);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(201).json(savedArtist);
+  } catch (err: any) {
+    console.error("Failed to create artist - message:", err?.message);
+    console.error("Failed to create artist - stack:", err?.stack);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
