@@ -173,7 +173,9 @@ const createArtist: RequestHandler = async (req, res) => {
 
     // Hvis du har genreIds (array af tal), hent genre-objekter og tilknyt dem
     if (Array.isArray(genreIds) && genreIds.length > 0) {
-      const genres = await genreRepo.findByIds(genreIds);
+      const genres = await genreRepo.find({
+        where: { id: In(genreIds) } as any
+      });
       (newArtist as any).genres = genres;
     }
 
@@ -370,7 +372,7 @@ const updateArtist: RequestHandler = async (req, res) => {
   } catch (err) {
     await queryRunner.rollbackTransaction();
     console.error("Failed to update artist:", err);
-    res.status(500).json({ error: "Kunne ikke opdatere artist" });
+    res.status(500).json({ error: "Failed to update artist" });
   } finally {
     await queryRunner.release();
   }
