@@ -117,6 +117,85 @@ const getArtists: RequestHandler = async (req, res) => {
 
 artistRouter.get("/", getArtists);
 
+
+/**
+ * @openapi
+ * /artists/{id}:
+ *   get:
+ *     summary: Get single artist by id
+ *     description: Retrieve a single artist by numeric id. Returns the artist with its genres, schedule and stage relations.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Numeric id of the artist
+ *     responses:
+ *       '200':
+ *         description: Artist found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Artist'
+ *       '400':
+ *         description: Invalid id (not an integer)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Invalid id"
+ *       '404':
+ *         description: Artist not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Artist not found"
+ *       '500':
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
+
+// GET /artists/:id
+const getArtistById: RequestHandler = async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+
+  try {
+    const artistRepo = AppDataSource.getRepository(Artist);
+    const artist = await artistRepo.findOne({
+      where: { id },
+      relations: ["genres", "schedule", "stage"],
+    });
+
+    if (!artist) return res.status(404).json({ error: "Artist not found" });
+
+    // Return object as-is (it includes relations)
+    return res.json(artist);
+  } catch (err) {
+    console.error("Error fetching artist:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+artistRouter.get("/:id", getArtistById);
+
 /**
  * @openapi
  * /artists:

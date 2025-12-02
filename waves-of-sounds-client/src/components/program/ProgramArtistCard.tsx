@@ -43,7 +43,7 @@ interface Props {
 
   return (
     <Link
-      to={`/artist/${artist.name}`}
+      to={`/artist/${artist.id}`}
       relative="path"
       state={artist}
       >
@@ -57,10 +57,10 @@ interface Props {
           />
           
           <div className="artist_card_info">
-            <p className="artist_name">{artist.name}</p>
-            <p className="artist_date">{artist.schedule.startDate}</p>
-            <p className="artist_time">{artist.schedule.startTime.slice(0, 5)}</p>
-            <p className="artist_stage">{stageName}</p>
+            <p className="artist_name">{artist.name ?? "Unknown artist"}</p>
+            <p className="artist_date">{artist.schedule?.startDate ?? ""}</p>
+            <p className="artist_time">{artist.schedule?.startTime ? artist.schedule.startTime.slice(0, 5) : ""}</p>
+            <p className="artist_stage">{stageName ?? ""}</p>
           </div>
           
           {/* Admin-only delete */}
