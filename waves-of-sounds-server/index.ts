@@ -72,16 +72,13 @@ app.use(cors({
 app.use(express.json());
 setupSwagger(app);
 
+init(app);
+
 app.get("/", (req, res) => {
-  res.send("Root endpoint. Connected to backend.");
+  res.send("Root endpoint.");
 });
 
-const PORT: number = Number(process.env.PORT ?? 4001);
-
-(async () => {
-  await init(app); // ✔️ vent på DB + router-setup
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-})();
+const PORT = process.env.PORT || 4001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
