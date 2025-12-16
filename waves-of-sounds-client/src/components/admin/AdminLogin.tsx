@@ -41,13 +41,6 @@ export default function AdminLogin() {
     setError(null);
     setLoading(true);
 
-    // try {
-    //   const res = await axios.post<LoginResponse>("/user/login", {
-    //     email: email.trim().toLowerCase(),
-    //     password: password,
-    //   });
-    
-    
     try {
     // use api (which has baseURL from REACT_APP_API_URL)
     const res = await api.post<LoginResponse>("/user/login", {
@@ -71,17 +64,6 @@ export default function AdminLogin() {
         setError("Du har ikke admin-rettigheder.");
         localStorage.removeItem("isAdmin");
       }
-
-    // } catch (err: unknown) {
-    //   if (axios.isAxiosError(err)) {
-    //     setError(err.response?.data?.error ?? "Fejl ved login.");
-    //   } else if (err instanceof Error) {
-    //     setError(err.message);
-    //   } else {
-    //     setError("Ukendt fejl ved login.");
-    //   }
-    //   localStorage.removeItem("isAdmin");
-    // }
 
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

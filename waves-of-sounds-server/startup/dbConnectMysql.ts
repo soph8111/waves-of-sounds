@@ -1,16 +1,3 @@
-// import { AppDataSource } from "./data-source";
-
-// const dbConnectMysql = async () => {
-//   try {
-//     await AppDataSource.initialize(); // initialize the datasource
-//     console.log("Database connection successful");
-//   } catch (err) {
-//     console.log("Error connecting to Mysql", err);
-//   }
-// };
-
-// export default dbConnectMysql;
-
 import { AppDataSource } from "./data-source";
 
 const dbConnectMysql = async () => {
@@ -27,8 +14,6 @@ const dbConnectMysql = async () => {
     }
   } catch (err) {
     console.log("Error connecting to Mysql", err);
-    // Valgfrit: exit process hvis der ikke er forbindelse (gør fejlsøgning lettere)
-    // process.exit(1);
   }
 };
 

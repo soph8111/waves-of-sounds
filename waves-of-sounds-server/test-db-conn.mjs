@@ -1,4 +1,5 @@
-// test-db-conn.mjs
+// Test-fil som tester MySQL-forbindelse (tjekker om fejlen er ved DB / env / netværk)
+// "node test-db-conn.mjs" i consollen
 import mysql from "mysql2/promise";
 import { URL } from "url";
 

@@ -18,22 +18,20 @@ import AdminNewArtistForm from "../components/admin/AdminNewArtistForm";
 import useArtist, { Artist } from "../hooks/useArtist";
 import { Stage } from "../hooks/useStage";
 import { Genre } from "../hooks/useGenre";
-import { Article } from "../hooks/useArticle";
 import useSchedule, { Schedule } from "../hooks/useSchedule";
 
+// DataQuery Interface for brugerens valg
 export interface DataQuery {
-  artist: Artist | null;
   stage: Stage | null;
   schedule: Schedule | null;
   scheduleDate: string | null;
   genre: Genre | null;
-  article: Article | null;
 }
 
-
-
 const Program = () => {
+  // fælles state for alle filtre
   const [dataQuery, setDataQuery] = useState<DataQuery>({} as DataQuery);
+  
   const isAdmin = localStorage.getItem("isAdmin") === "true";
 
   // Hooks: hent schedules + artists

@@ -2,7 +2,7 @@ import express from "express";
 import dbConnectMysql from "./dbConnectMysql";
 import setupMysqlRouters from "./setupMysqlRouters";
 
-// Connecting to the database
+// Connecting til databasen. App er exppress-server (fra index.ts)
 const init = (app: express.Application) => {
   dbConnectMysql();
   setupMysqlRouters(app);

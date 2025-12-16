@@ -1,7 +1,7 @@
-import { Router, RequestHandler } from "express";
-import { Artist } from "../entities/Artist";
-import { AppDataSource } from "../startup/data-source";
-import { Genre } from "../entities/Genre";
+import { Router, RequestHandler } from "express"; 
+import { Artist } from "../entities/Artist"; // Database-tabel via typeORM
+import { AppDataSource } from "../startup/data-source"; // Database forbindelse
+import { Genre } from "../entities/Genre"; // flere tabeller -> relationer til artist
 import { Schedule } from "../entities/Schedule";
 import { In } from "typeorm"; // TypeORM’s SQL "WHERE IN" search
 
@@ -21,6 +21,7 @@ interface Response {
   results: ModifiedArtist[];
 }
 
+// TypeORM bruger repositories til at hente data fra entities
 const artistRouter = Router();
 const artistRepository = AppDataSource.getRepository(Artist);
 
@@ -62,7 +63,8 @@ const artistRepository = AppDataSource.getRepository(Artist);
  *                     $ref: '#/components/schemas/Artist'
  */
 
-// Get all artists (GET)
+// Get all artists (GET) (express)
+// req = det frontend sender. res = det svar frontend modtager
 const getArtists: RequestHandler = async (req, res) => {
   try {
     const genreId = req.query.genres ? Number(req.query.genres) : undefined;
@@ -108,6 +110,7 @@ const getArtists: RequestHandler = async (req, res) => {
       results: modifiedArtists,
     };
 
+    // Express sender JSON til frontend
     res.json(response);
   } catch (err) {
     console.error("Error fetching artists:", err);
