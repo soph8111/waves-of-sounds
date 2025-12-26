@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import apiClient from "../../services/api-client";
+import api from "../../api";
 
 import { Artist } from "../../hooks/useArtist";
 
@@ -68,6 +68,7 @@ const NewArtistForm = ({
 
 
   // ---------------- HANDLE SUBMIT WITH ROLLBACK ----------------
+  // Frontend validation
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");
@@ -122,12 +123,12 @@ const NewArtistForm = ({
 
       if (artistToEdit) {
         // PUT UPDATE
-        const res = await apiClient.put(`/artists/${artistToEdit.id}`, payload);
+        const res = await api.put(`/artists/${artistToEdit.id}`, payload);
         saved = res.data;
         setMessage("Artist updated!");
       } else {
         // POST CREATE
-        const res = await apiClient.post("/artists", payload);
+        const res = await api.post("/artists", payload);
         saved = res.data;
         setMessage("Artist created!");
 
@@ -157,7 +158,7 @@ const NewArtistForm = ({
         setSelectedGenres(snapshot.selectedGenres);
         setMessage("Saved but parent update failed; rolled back UI.");
       }
-
+      // Backend validation
     } catch (err) {
       console.error("Error saving:", err);
 

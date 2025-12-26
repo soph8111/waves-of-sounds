@@ -5,11 +5,23 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import api from "../../api";
 
+// BEFORE JWT
+// type LoginResponse = {
+//   id: number;
+//   email: string;
+//   isAdmin: boolean;
+// };
+
+// AFTER JWT
 type LoginResponse = {
-  id: number;
-  email: string;
-  isAdmin: boolean;
+  token: string;
+  user: {
+    id: number;
+    email: string;
+    isAdmin: boolean;
+  };
 };
+
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -43,13 +55,16 @@ export default function AdminLogin() {
 
     try {
     // use api (which has baseURL from REACT_APP_API_URL)
-    const res = await api.post<LoginResponse>("/user/login", {
-      email: email.trim().toLowerCase(),
+    const res = await api.post<LoginResponse>("/user/login", { // Backend validation - checking if user is admin
+      email: email.trim().toLowerCase(), // Frontend sanity validation (data normalisering). Clearing user input (like whitespace, case-errors)
       password,
     });
-
-      if (res.data.isAdmin === true) {
-        // gem login
+      // BEFORE JWT
+      ///if (res.data.isAdmin === true) {
+      // AFTER JWT
+      if (res.data.user.isAdmin === true) {
+        // gem login i localstorage
+        localStorage.setItem("token", res.data.token);
         localStorage.setItem("isAdmin", "true");
 
         // tøm felter
@@ -63,9 +78,12 @@ export default function AdminLogin() {
       } else {
         setError("Du har ikke admin-rettigheder.");
         localStorage.removeItem("isAdmin");
+        // AFTER JWT - added
+        localStorage.removeItem("token");
       }
 
-    } catch (err: unknown) {
+      // Validation: error handling -> gives user feedback about backend
+    } catch (err: unknown) { 
       if (axios.isAxiosError(err)) {
         const msg = err.response?.data?.error ?? err.message;
         setError(typeof msg === "string" ? msg : JSON.stringify(msg));
@@ -104,10 +122,10 @@ export default function AdminLogin() {
     >
       <Input
         type="email"
-        value={email}
+        value={email} // HTML input validation (input should be an email)
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Admin login"
-        isRequired
+        isRequired // HTML input validation (no empty field)
         mb={3}
       />
 

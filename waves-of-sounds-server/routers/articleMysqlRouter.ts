@@ -1,6 +1,7 @@
 import { Router, RequestHandler } from "express";
 import { AppDataSource } from "../startup/data-source";
 import { Article } from "../entities/Article";
+import { requireAdmin } from "../src/middleware/requireAdmin";
 
 interface Response {
   count: number;
@@ -103,7 +104,7 @@ const createArticle: RequestHandler = async (req, res) => {
   }
 };
 
-articleRouter.post("/", createArticle);
+articleRouter.post("/", requireAdmin, createArticle);
 
 export default articleRouter;
 

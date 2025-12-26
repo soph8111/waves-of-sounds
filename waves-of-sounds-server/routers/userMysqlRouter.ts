@@ -2,6 +2,9 @@ import { Router, Request, Response } from "express";
 import { AppDataSource } from "../startup/data-source";
 import { User } from "../entities/User";
 import bcrypt from "bcryptjs";
+// JWT import for security
+import jwt from "jsonwebtoken"
+
 
 const userRouter = Router();
 const userRepository = AppDataSource.getRepository(User);
@@ -62,11 +65,38 @@ userRouter.post("/login", async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
+    // BEFORE JWT
+    // res.json({
+    //   id: user.id,
+    //   email: user.email,
+    //   isAdmin: !!user.is_admin,
+    // });
+    
+    // AFTER JWT
+    const token = jwt.sign(
+      { 
+        // Payload -> what the backend say is true
+        userId: user.id,
+        isAdmin: !!user.is_admin,
+      },
+      // Secret -> Only the backend knows this (frontend can't manipulate this)
+      process.env.JWT_SECRET as string,
+      {
+        // Option -> the token expires after 2h
+        expiresIn: "2h",
+      }
+    );
+
     res.json({
-      id: user.id,
-      email: user.email,
-      isAdmin: !!user.is_admin,
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        isAdmin: !!user.is_admin,
+      },
     });
+
+    // jwt end
 
   } catch (err) {
     console.error("Login error:", err);
@@ -74,7 +104,7 @@ userRouter.post("/login", async (req: Request, res: Response): Promise<void> => 
   }
 });
 
-// GET /user (må gerne blive hvis du bruger den)
+// GET /user 
 userRouter.get("/", async (req, res) => {
   const users = await userRepository.find();
   res.send({ count: users.length, results: users });

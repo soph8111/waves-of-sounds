@@ -4,6 +4,7 @@ import { AppDataSource } from "../startup/data-source"; // Database forbindelse
 import { Genre } from "../entities/Genre"; // flere tabeller -> relationer til artist
 import { Schedule } from "../entities/Schedule";
 import { In } from "typeorm"; // TypeORM’s SQL "WHERE IN" search
+import { requireAdmin } from "../src/middleware/requireAdmin";
 
 interface ModifiedArtist {
   id: number;
@@ -270,7 +271,7 @@ const createArtist: RequestHandler = async (req, res) => {
   }
 };
 
-artistRouter.post("/", createArtist);
+artistRouter.post("/", requireAdmin, createArtist);
 
 /**
  * @openapi
@@ -335,7 +336,7 @@ const deleteArtist: RequestHandler = async (req, res) => {
   }
 };
 
-artistRouter.delete("/:id", deleteArtist);
+artistRouter.delete("/:id", requireAdmin, deleteArtist);
 
 /**
  * @openapi
@@ -460,7 +461,7 @@ const updateArtist: RequestHandler = async (req, res) => {
   }
 };
 
-artistRouter.put("/:id", updateArtist);
+artistRouter.put("/:id", requireAdmin, updateArtist);
 
 
 export default artistRouter;

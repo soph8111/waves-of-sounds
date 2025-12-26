@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 // import data from "../services/program.json";
 import { Artist } from "../../hooks/useArtist";
-import apiClient from "../../services/api-client";
+import api from "../../api";
 
 import useStage from "../../hooks/useStage";
 
@@ -26,7 +26,7 @@ interface Props {
     if (!confirm(`Slet "${artist.name}" fra programmet?`)) return;
 
     try {
-        await apiClient.delete(`artists/${artist.id}`);
+        await api.delete(`artists/${artist.id}`);
         onDeleted?.(artist.id);
     } catch (err) {
         console.error(err);
